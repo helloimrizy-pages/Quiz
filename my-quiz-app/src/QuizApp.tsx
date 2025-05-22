@@ -7,7 +7,6 @@ import {
   Clock,
   BookOpen,
   ArrowRight,
-  ArrowLeft,
   Home,
   ChevronLeft,
   ChevronRight,
@@ -81,7 +80,7 @@ const QuizApp: React.FC = () => {
   const [startTime, setStartTime] = useState<Date | null>(null);
   const [endTime, setEndTime] = useState<Date | null>(null);
   const [loading, setLoading] = useState(true);
-  const [quizSubmitted, setQuizSubmitted] = useState(false);
+  const [, setQuizSubmitted] = useState(false);
 
   useEffect(() => {
     const loadQuizData = async () => {
