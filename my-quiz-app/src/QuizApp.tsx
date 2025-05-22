@@ -46,6 +46,26 @@ interface UserAnswer {
   isCorrect: boolean;
 }
 
+const createAllQuestionsQuiz = (quizData: QuizData): Quiz => {
+  const allQuestions: Question[] = [];
+  let questionCounter = 1;
+
+  quizData.quizzes.forEach((quiz) => {
+    quiz.questions.forEach((question) => {
+      allQuestions.push({
+        ...question,
+        questionNumber: questionCounter++,
+      });
+    });
+  });
+
+  return {
+    quiz: "Master Challenge",
+    topic: "All Topics Combined",
+    questions: allQuestions,
+  };
+};
+
 const QuizApp: React.FC = () => {
   const [quizData, setQuizData] = useState<QuizData | null>(null);
   const [currentView, setCurrentView] = useState<"home" | "quiz" | "results">(
@@ -243,6 +263,46 @@ const HomeView: React.FC<{
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
           {quizData.description}
         </p>
+      </div>
+
+      <div className="mb-8">
+        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl shadow-lg p-6 text-white">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-xl font-bold mb-2 text-left">
+                Master Challenge
+              </h3>
+              <p className="text-purple-100 mb-4">
+                Take on all{" "}
+                {quizData.quizzes.reduce(
+                  (total, quiz) => total + quiz.questions.length,
+                  0
+                )}{" "}
+                questions from every quiz in one comprehensive test
+              </p>
+              <div className="flex items-center text-sm text-purple-100">
+                <Clock className="h-4 w-4 mr-1" />
+                <span>
+                  ~
+                  {Math.ceil(
+                    quizData.quizzes.reduce(
+                      (total, quiz) => total + quiz.questions.length,
+                      0
+                    ) * 1.5
+                  )}{" "}
+                  min
+                </span>
+              </div>
+            </div>
+            <button
+              onClick={() => onStartQuiz(createAllQuestionsQuiz(quizData))}
+              className="bg-white hover:bg-gray-100 text-purple-600 font-bold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center group flex-shrink-0 ml-4"
+            >
+              Start Master Quiz
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
+            </button>
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
