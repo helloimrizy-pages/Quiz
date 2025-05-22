@@ -7,7 +7,11 @@ import {
   Clock,
   BookOpen,
   ArrowRight,
+  ArrowLeft,
   Home,
+  ChevronLeft,
+  ChevronRight,
+  Flag,
 } from "lucide-react";
 
 declare global {
@@ -43,7 +47,7 @@ interface QuizData {
 interface UserAnswer {
   questionIndex: number;
   selectedAnswer: string;
-  isCorrect: boolean;
+  isCorrect?: boolean;
 }
 
 const createAllQuestionsQuiz = (quizData: QuizData): Quiz => {
@@ -74,11 +78,10 @@ const QuizApp: React.FC = () => {
   const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<UserAnswer[]>([]);
-  const [selectedAnswer, setSelectedAnswer] = useState<string>("");
-  const [showResult, setShowResult] = useState(false);
   const [startTime, setStartTime] = useState<Date | null>(null);
   const [endTime, setEndTime] = useState<Date | null>(null);
   const [loading, setLoading] = useState(true);
+  const [quizSubmitted, setQuizSubmitted] = useState(false);
 
   useEffect(() => {
     const loadQuizData = async () => {
@@ -112,6 +115,24 @@ const QuizApp: React.FC = () => {
                   ],
                   correctAnswer: "Code reusability",
                 },
+                {
+                  questionNumber: 2,
+                  questionText:
+                    "Which programming language is primarily used for web development?",
+                  options: ["Python", "JavaScript", "C++", "Assembly"],
+                  correctAnswer: "JavaScript",
+                },
+                {
+                  questionNumber: 3,
+                  questionText: "What does HTML stand for?",
+                  options: [
+                    "Hypertext Markup Language",
+                    "High-level Text Management Language",
+                    "Home Tool Markup Language",
+                    "Hyperlink and Text Markup Language",
+                  ],
+                  correctAnswer: "Hypertext Markup Language",
+                },
               ],
             },
           ],
@@ -129,43 +150,58 @@ const QuizApp: React.FC = () => {
     setSelectedQuiz(quiz);
     setCurrentQuestionIndex(0);
     setUserAnswers([]);
-    setSelectedAnswer("");
-    setShowResult(false);
     setStartTime(new Date());
     setEndTime(null);
+    setQuizSubmitted(false);
     setCurrentView("quiz");
   };
 
   const handleAnswerSelect = (answer: string) => {
-    setSelectedAnswer(answer);
+    const existingAnswerIndex = userAnswers.findIndex(
+      (ans) => ans.questionIndex === currentQuestionIndex
+    );
+
+    if (existingAnswerIndex !== -1) {
+      // Update existing answer
+      const updatedAnswers = [...userAnswers];
+      updatedAnswers[existingAnswerIndex] = {
+        questionIndex: currentQuestionIndex,
+        selectedAnswer: answer,
+      };
+      setUserAnswers(updatedAnswers);
+    } else {
+      // Add new answer
+      setUserAnswers([
+        ...userAnswers,
+        {
+          questionIndex: currentQuestionIndex,
+          selectedAnswer: answer,
+        },
+      ]);
+    }
   };
 
-  const submitAnswer = () => {
-    if (!selectedQuiz || selectedAnswer === "") return;
+  const navigateToQuestion = (index: number) => {
+    if (index >= 0 && index < (selectedQuiz?.questions.length || 0)) {
+      setCurrentQuestionIndex(index);
+    }
+  };
 
-    const currentQuestion = selectedQuiz.questions[currentQuestionIndex];
-    const isCorrect = selectedAnswer === currentQuestion.correctAnswer;
+  const submitQuiz = () => {
+    if (!selectedQuiz) return;
 
-    const newAnswer: UserAnswer = {
-      questionIndex: currentQuestionIndex,
-      selectedAnswer,
-      isCorrect,
-    };
+    // Calculate results for all answered questions
+    const answersWithResults = userAnswers.map((answer) => ({
+      ...answer,
+      isCorrect:
+        answer.selectedAnswer ===
+        selectedQuiz.questions[answer.questionIndex].correctAnswer,
+    }));
 
-    const updatedAnswers = [...userAnswers, newAnswer];
-    setUserAnswers(updatedAnswers);
-    setShowResult(true);
-
-    setTimeout(() => {
-      if (currentQuestionIndex < selectedQuiz.questions.length - 1) {
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
-        setSelectedAnswer("");
-        setShowResult(false);
-      } else {
-        setEndTime(new Date());
-        setCurrentView("results");
-      }
-    }, 1500);
+    setUserAnswers(answersWithResults);
+    setEndTime(new Date());
+    setQuizSubmitted(true);
+    setCurrentView("results");
   };
 
   const resetQuiz = () => {
@@ -173,24 +209,40 @@ const QuizApp: React.FC = () => {
     setSelectedQuiz(null);
     setCurrentQuestionIndex(0);
     setUserAnswers([]);
-    setSelectedAnswer("");
-    setShowResult(false);
     setStartTime(null);
     setEndTime(null);
+    setQuizSubmitted(false);
   };
 
   const calculateResults = () => {
     const correctAnswers = userAnswers.filter(
       (answer) => answer.isCorrect
     ).length;
-    const totalQuestions = userAnswers.length;
-    const percentage = Math.round((correctAnswers / totalQuestions) * 100);
+    const totalQuestions = selectedQuiz?.questions.length || 0;
+    const answeredQuestions = userAnswers.length;
+    const percentage =
+      totalQuestions > 0
+        ? Math.round((correctAnswers / totalQuestions) * 100)
+        : 0;
     const duration =
       startTime && endTime
         ? Math.round((endTime.getTime() - startTime.getTime()) / 1000)
         : 0;
 
-    return { correctAnswers, totalQuestions, percentage, duration };
+    return {
+      correctAnswers,
+      totalQuestions,
+      answeredQuestions,
+      percentage,
+      duration,
+    };
+  };
+
+  const getCurrentAnswer = () => {
+    return (
+      userAnswers.find((ans) => ans.questionIndex === currentQuestionIndex)
+        ?.selectedAnswer || ""
+    );
   };
 
   if (loading) {
@@ -225,11 +277,11 @@ const QuizApp: React.FC = () => {
         <QuizView
           quiz={selectedQuiz}
           currentQuestionIndex={currentQuestionIndex}
-          selectedAnswer={selectedAnswer}
-          showResult={showResult}
           userAnswers={userAnswers}
+          currentAnswer={getCurrentAnswer()}
           onAnswerSelect={handleAnswerSelect}
-          onSubmitAnswer={submitAnswer}
+          onNavigateToQuestion={navigateToQuestion}
+          onSubmitQuiz={submitQuiz}
           onGoHome={resetQuiz}
         />
       )}
@@ -379,26 +431,31 @@ const HomeView: React.FC<{
 const QuizView: React.FC<{
   quiz: Quiz;
   currentQuestionIndex: number;
-  selectedAnswer: string;
-  showResult: boolean;
   userAnswers: UserAnswer[];
+  currentAnswer: string;
   onAnswerSelect: (answer: string) => void;
-  onSubmitAnswer: () => void;
+  onNavigateToQuestion: (index: number) => void;
+  onSubmitQuiz: () => void;
   onGoHome: () => void;
 }> = ({
   quiz,
   currentQuestionIndex,
-  selectedAnswer,
-  showResult,
+  userAnswers,
+  currentAnswer,
   onAnswerSelect,
-  onSubmitAnswer,
+  onNavigateToQuestion,
+  onSubmitQuiz,
   onGoHome,
 }) => {
   const currentQuestion = quiz.questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / quiz.questions.length) * 100;
+  const answeredCount = userAnswers.length;
+  const canGoBack = currentQuestionIndex > 0;
+  const canGoNext = currentQuestionIndex < quiz.questions.length - 1;
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto px-4 py-8 max-w-6xl">
+      {/* Header */}
       <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
         <div className="flex items-center justify-between mb-4">
           <button
@@ -418,7 +475,9 @@ const QuizView: React.FC<{
             <span>
               Question {currentQuestionIndex + 1} of {quiz.questions.length}
             </span>
-            <span>{Math.round(progress)}% Complete</span>
+            <span>
+              {answeredCount} of {quiz.questions.length} answered
+            </span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
@@ -429,89 +488,129 @@ const QuizView: React.FC<{
         </div>
       </div>
 
-      <div className="bg-white rounded-xl shadow-lg p-8">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-8">
-          {currentQuestion.questionText}
-        </h2>
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        {/* Question Navigator */}
+        <div className="lg:col-span-1">
+          <div className="bg-white rounded-xl shadow-lg p-6 sticky top-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              Questions
+            </h3>
+            <div className="grid grid-cols-5 lg:grid-cols-3 gap-2">
+              {quiz.questions.map((_, index) => {
+                const isAnswered = userAnswers.some(
+                  (ans) => ans.questionIndex === index
+                );
+                const isCurrent = index === currentQuestionIndex;
 
-        <div className="space-y-4 mb-8">
-          {currentQuestion.options.map((option, index) => {
-            const isSelected = selectedAnswer === option;
-            const isCorrect = option === currentQuestion.correctAnswer;
-            const isWrong = showResult && isSelected && !isCorrect;
-            const shouldHighlight = showResult && isCorrect;
+                return (
+                  <button
+                    key={index}
+                    onClick={() => onNavigateToQuestion(index)}
+                    className={`w-10 h-10 rounded-lg text-sm font-medium transition-all duration-200 ${
+                      isCurrent
+                        ? "bg-indigo-600 text-white"
+                        : isAnswered
+                        ? "bg-green-100 text-green-800 hover:bg-green-200"
+                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                    }`}
+                  >
+                    {index + 1}
+                  </button>
+                );
+              })}
+            </div>
 
-            return (
-              <button
-                key={index}
-                onClick={() => !showResult && onAnswerSelect(option)}
-                disabled={showResult}
-                className={`w-full p-4 text-left rounded-lg border-2 transition-all duration-200 ${
-                  showResult
-                    ? shouldHighlight
-                      ? "border-green-500 bg-green-50 text-green-800"
-                      : isWrong
-                      ? "border-red-500 bg-red-50 text-red-800"
-                      : "border-gray-200 bg-gray-50"
-                    : isSelected
-                    ? "border-indigo-500 bg-indigo-50 text-indigo-800"
-                    : "border-gray-200 hover:border-indigo-300 hover:bg-indigo-50"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-medium">{option}</span>
-                  {showResult && (
-                    <>
-                      {shouldHighlight && (
-                        <CheckCircle className="h-5 w-5 text-green-600" />
-                      )}
-                      {isWrong && <XCircle className="h-5 w-5 text-red-600" />}
-                    </>
-                  )}
-                </div>
-              </button>
-            );
-          })}
+            <div className="mt-6 space-y-2 text-xs text-gray-600">
+              <div className="flex items-center">
+                <div className="w-3 h-3 bg-indigo-600 rounded mr-2"></div>
+                <span>Current</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-3 h-3 bg-green-100 border border-green-200 rounded mr-2"></div>
+                <span>Answered</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-3 h-3 bg-gray-100 border border-gray-200 rounded mr-2"></div>
+                <span>Not answered</span>
+              </div>
+            </div>
+
+            <button
+              onClick={onSubmitQuiz}
+              className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center"
+            >
+              <Flag className="h-4 w-4 mr-2" />
+              Submit Quiz
+            </button>
+          </div>
         </div>
 
-        {!showResult && (
-          <button
-            onClick={onSubmitAnswer}
-            disabled={selectedAnswer === ""}
-            className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium py-4 px-6 rounded-lg transition-colors duration-200"
-          >
-            Submit Answer
-          </button>
-        )}
+        {/* Main Question Area */}
+        <div className="lg:col-span-3">
+          <div className="bg-white rounded-xl shadow-lg p-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-8">
+              {currentQuestion.questionText}
+            </h2>
 
-        {showResult && (
-          <div
-            className={`text-center p-4 rounded-lg ${
-              selectedAnswer === currentQuestion.correctAnswer
-                ? "bg-green-50 text-green-800"
-                : "bg-red-50 text-red-800"
-            }`}
-          >
-            <div className="flex items-center justify-center mb-2">
-              {selectedAnswer === currentQuestion.correctAnswer ? (
-                <CheckCircle className="h-6 w-6 text-green-600 mr-2" />
-              ) : (
-                <XCircle className="h-6 w-6 text-red-600 mr-2" />
-              )}
-              <span className="font-semibold">
-                {selectedAnswer === currentQuestion.correctAnswer
-                  ? "Correct!"
-                  : "Incorrect"}
-              </span>
+            <div className="space-y-4 mb-8">
+              {currentQuestion.options.map((option, index) => {
+                const isSelected = currentAnswer === option;
+
+                return (
+                  <button
+                    key={index}
+                    onClick={() => onAnswerSelect(option)}
+                    className={`w-full p-4 text-left rounded-lg border-2 transition-all duration-200 ${
+                      isSelected
+                        ? "border-indigo-500 bg-indigo-50 text-indigo-800"
+                        : "border-gray-200 hover:border-indigo-300 hover:bg-indigo-50"
+                    }`}
+                  >
+                    <div className="flex items-center">
+                      <div
+                        className={`w-4 h-4 rounded-full border-2 mr-3 ${
+                          isSelected
+                            ? "border-indigo-500 bg-indigo-500"
+                            : "border-gray-300"
+                        }`}
+                      >
+                        {isSelected && (
+                          <div className="w-2 h-2 bg-white rounded-full m-0.5"></div>
+                        )}
+                      </div>
+                      <span className="font-medium">{option}</span>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
-            {selectedAnswer !== currentQuestion.correctAnswer && (
-              <p className="text-sm">
-                The correct answer is:{" "}
-                <strong>{currentQuestion.correctAnswer}</strong>
-              </p>
-            )}
+
+            {/* Navigation Controls */}
+            <div className="flex justify-between items-center">
+              <button
+                onClick={() => onNavigateToQuestion(currentQuestionIndex - 1)}
+                disabled={!canGoBack}
+                className="flex items-center px-6 py-3 text-gray-600 disabled:text-gray-400 disabled:cursor-not-allowed hover:text-gray-900 transition-colors duration-200"
+              >
+                <ChevronLeft className="h-4 w-4 mr-1" />
+                Previous
+              </button>
+
+              <div className="text-sm text-gray-500">
+                {currentAnswer ? "Answer selected" : "Select an answer"}
+              </div>
+
+              <button
+                onClick={() => onNavigateToQuestion(currentQuestionIndex + 1)}
+                disabled={!canGoNext}
+                className="flex items-center px-6 py-3 text-indigo-600 disabled:text-gray-400 disabled:cursor-not-allowed hover:text-indigo-700 transition-colors duration-200"
+              >
+                Next
+                <ChevronRight className="h-4 w-4 ml-1" />
+              </button>
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
@@ -521,6 +620,7 @@ const ResultsView: React.FC<{
   results: {
     correctAnswers: number;
     totalQuestions: number;
+    answeredQuestions: number;
     percentage: number;
     duration: number;
   };
@@ -570,9 +670,13 @@ const ResultsView: React.FC<{
           >
             {results.percentage}%
           </div>
-          <div className="text-xl text-gray-700 mb-6">
+          <div className="text-xl text-gray-700 mb-2">
             {results.correctAnswers} out of {results.totalQuestions} questions
             correct
+          </div>
+          <div className="text-gray-600 mb-6">
+            {results.answeredQuestions} of {results.totalQuestions} questions
+            answered
           </div>
           <div className="flex justify-center items-center text-gray-600">
             <Clock className="h-4 w-4 mr-1" />
@@ -593,6 +697,7 @@ const ResultsView: React.FC<{
             const userAnswer = userAnswers.find(
               (ans) => ans.questionIndex === index
             );
+
             return (
               <div
                 key={index}
@@ -602,31 +707,43 @@ const ResultsView: React.FC<{
                   <h4 className="font-medium text-gray-900 flex-1 mr-4">
                     {index + 1}. {question.questionText}
                   </h4>
-                  {userAnswer?.isCorrect ? (
-                    <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
+                  {userAnswer ? (
+                    userAnswer.isCorrect ? (
+                      <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
+                    ) : (
+                      <XCircle className="h-5 w-5 text-red-600 flex-shrink-0" />
+                    )
                   ) : (
-                    <XCircle className="h-5 w-5 text-red-600 flex-shrink-0" />
+                    <div className="h-5 w-5 bg-gray-300 rounded-full flex-shrink-0"></div>
                   )}
                 </div>
                 <div className="text-sm text-gray-600">
-                  <div className="mb-1">
-                    <span className="font-medium">Your answer:</span>{" "}
-                    <span
-                      className={
-                        userAnswer?.isCorrect
-                          ? "text-green-600"
-                          : "text-red-600"
-                      }
-                    >
-                      {userAnswer?.selectedAnswer}
-                    </span>
-                  </div>
-                  {!userAnswer?.isCorrect && (
-                    <div>
-                      <span className="font-medium">Correct answer:</span>{" "}
-                      <span className="text-green-600">
-                        {question.correctAnswer}
-                      </span>
+                  {userAnswer ? (
+                    <>
+                      <div className="mb-1">
+                        <span className="font-medium">Your answer:</span>{" "}
+                        <span
+                          className={
+                            userAnswer.isCorrect
+                              ? "text-green-600"
+                              : "text-red-600"
+                          }
+                        >
+                          {userAnswer.selectedAnswer}
+                        </span>
+                      </div>
+                      {!userAnswer.isCorrect && (
+                        <div>
+                          <span className="font-medium">Correct answer:</span>{" "}
+                          <span className="text-green-600">
+                            {question.correctAnswer}
+                          </span>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <div className="text-gray-500 italic">
+                      Question not answered
                     </div>
                   )}
                 </div>
