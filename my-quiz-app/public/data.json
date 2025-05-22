@@ -1,0 +1,1253 @@
+{
+  "course": "Software Technology - Programming Technology",
+  "description": "Quiz questions from softTechMerged.pdf",
+  "quizzes": [
+    {
+      "quiz": "Week 2 - Programming Technology",
+      "topic": "Class Diagrams and OOP",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Which type of relation in the class diagram affects between classes (and not their instances)?",
+          "options": [
+            "Inheritance",
+            "Association",
+            "Dependency",
+            "Composition"
+          ],
+          "correctAnswer": "Inheritance"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "How can you achieve if there are many classes in a class diagram to make their relationship cleared?",
+          "options": [
+            "We do not indicate the properties of the relationships (multiplicity, role name, etc.)",
+            "We split up the diagram",
+            "By omitting the details (attributes, operations)",
+            "We print the diagram in a smaller size"
+          ],
+          "correctAnswer": "By omitting the details (attributes, operations)"
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "When do we list a method in a derived class, if a method of the same name exists in the parent class?",
+          "options": [
+            "Always",
+            "If we declare or override it in the derived class",
+            "Only in case of method overriding",
+            "If the method does an important activity (not setter / getter, etc.)"
+          ],
+          "correctAnswer": "If we declare or override it in the derived class"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "When is the method of the parent class visible in the derived class?",
+          "options": [
+            "Always",
+            "Only, if it is public",
+            "If we refer to it with the super keyword",
+            "If it is public or protected"
+          ],
+          "correctAnswer": "If it is public or protected"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "What is true about the dependency relation?",
+          "options": [
+            "Weak association",
+            "The dependent object cannot create an instance of the class that generates the dependency",
+            "Strong association",
+            "No answer text provided"
+          ],
+          "correctAnswer": "Weak association"
+        },
+        {
+          "questionNumber": 6,
+          "questionText": "Which statement is false about generalization?",
+          "options": [
+            "Java allows multiple generalizations, if we do not implement more than one interface",
+            "Java does not allow multiple generalization",
+            "Generalization is the opposite of specialization",
+            "In Java, we express it with the keyword extends"
+          ],
+          "correctAnswer": "Java allows multiple generalizations, if we do not implement more than one interface"
+        }
+      ]
+    },
+    {
+      "quiz": "Week 3 - Programming Technology",
+      "topic": "Abstraction and Generics in Java",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "What can be a generic parameter in Java?",
+          "options": [
+            "Classes that implement the methods used by the generic",
+            "Any type",
+            "Any type that implements the methods used by the generic",
+            "Classes"
+          ],
+          "correctAnswer": "Any type"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "Which is considered an abstraction method?",
+          "options": [
+            "Both.",
+            "Usage of abstract methods.",
+            "Usage of generic classes.",
+            "None of these."
+          ],
+          "correctAnswer": "Both."
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "Can a generic class have an abstract method?",
+          "options": ["No.", "Yes."],
+          "correctAnswer": "Yes."
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "Can an abstract class have a generic method?",
+          "options": ["Yes.", "No."],
+          "correctAnswer": "Yes."
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Which statement is false?",
+          "options": [
+            "The collection groups any amount of data.",
+            "The type of data stored in the collection is the same.",
+            "In case of primitive types, we can instantiate the collection with the wrapper class of the primitive type.",
+            "Arrays are not collections."
+          ],
+          "correctAnswer": "The type of data stored in the collection is the same."
+        }
+      ]
+    },
+    {
+      "quiz": "Week 4 - Programming Technology",
+      "topic": "Static Methods, Exceptions, and Serialization",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "What data members can a static method use within its own class?",
+          "options": [
+            "Members, that have getters",
+            "Static members",
+            "All members",
+            "Static and public members"
+          ],
+          "correctAnswer": "Static members"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "What can't we use a static attribute for?",
+          "options": [
+            "For object attributes",
+            "To define flags",
+            "To define constant values",
+            "For values shared by objects in the class"
+          ],
+          "correctAnswer": "For object attributes"
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "What types of exceptions must be caught or indicated?",
+          "options": [
+            "None of the exceptions should be caught or indicated",
+            "Exception and RuntimeException",
+            "RuntimeException",
+            "Exception"
+          ],
+          "correctAnswer": "Exception"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "How can we define a custom exception?",
+          "options": [
+            "We create an enum which contains the types of errors",
+            "We create a simple class",
+            "We cannot do that",
+            "We derive our exception type from class Exception"
+          ],
+          "correctAnswer": "We derive our exception type from class Exception"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Which statement is false about the serialization implemented by Java Serializable?",
+          "options": [
+            "We can take a snapshot of the objects with it.",
+            "Serialization saves both the state and relationships of an object and can deserialize them automatically.",
+            "A typical tool to realize Remote Method Invokation (RMI).",
+            "We can create a binary representation of the object."
+          ],
+          "correctAnswer": "Serialization saves both the state and relationships of an object and can deserialize them automatically."
+        }
+      ]
+    },
+    {
+      "quiz": "Week 5 - Programming Technology",
+      "topic": "Swing GUI Basics",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "What is the super class of the Swing controls?",
+          "options": ["JObject", "JFrame", "JControl", "JComponent"],
+          "correctAnswer": "JComponent"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "Which class represents the window in the Swing environment?",
+          "options": ["JFrame", "JWindow", "JPanel", "JDialog"],
+          "correctAnswer": "JFrame"
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "Which method is used to define the behavior, that takes effect when we close the window?",
+          "options": [
+            "enableExitOnClose(...)",
+            "setAutoClose(...)",
+            "setDefaultCloseOperation(...)",
+            "setCloseBehavior(...)"
+          ],
+          "correctAnswer": "setDefaultCloseOperation(...)"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "Which pairs can be used to handle window events?",
+          "options": [
+            "addWindowListener method - WindowEvents implementation",
+            "addWindowEvents method - WindowAdapter implementation",
+            "addWindowEvents method - WindowEvents implementation",
+            "addWindowListener method - WindowAdapter implementation"
+          ],
+          "correctAnswer": "addWindowListener method - WindowAdapter implementation"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Which statement is true? The window icon file ...",
+          "options": [
+            "...should be placed inside of the project folder always.",
+            "...can be loaded both from the JAR of the program and from the file system the same way.",
+            "...loading can be guaranteed to work always, if we place it in the JAR of the program.",
+            "...could only be a bmp or ico file."
+          ],
+          "correctAnswer": "...loading can be guaranteed to work always, if we place it in the JAR of the program."
+        }
+      ]
+    },
+    {
+      "quiz": "Week 6 - Programming Technology",
+      "topic": "Swing Event Handling",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Which method can be used to add a mouse click handler to a Swing component?",
+          "options": [
+            "addMouseListener",
+            "addMouseWheelListener",
+            "addMouseClickListener",
+            "addMouseMotionListener"
+          ],
+          "correctAnswer": "addMouseListener"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "What should we do if we need to handle multiple types of mouse events?",
+          "options": [
+            "We implement the MouseListener, MouseMotionListener, MouseWheelListener interfaces separately one by one.",
+            "We create a class that implements all three interfaces (MouseListener, MouseMotionListener, MouseWheelListener).",
+            "We need to add a separate interface implementation for each event.",
+            "We derive an event handler class from the MouseAdapter."
+          ],
+          "correctAnswer": "We derive an event handler class from the MouseAdapter."
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "What is the basic idea of programs that use event handlers?",
+          "options": [
+            "While the program is running, certain activities are done as a result of events.",
+            "The event object must be defined by the event handler.",
+            "Errors are processed as events.",
+            "We can respond to mouse clicks in separate functions."
+          ],
+          "correctAnswer": "While the program is running, certain activities are done as a result of events."
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "Which statement is false about the event object?",
+          "options": [
+            "It has a reference to where the event occurred.",
+            "The source attribute that contains the source of the event always points to a real object.",
+            "Carries the properties of the event.",
+            "An appropriate event class can be created for similar types of events."
+          ],
+          "correctAnswer": "The source attribute that contains the source of the event always points to a real object."
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Which statement is false? The event handler function...",
+          "options": [
+            "...receives as a parameter the triggered event to which it is currently responding.",
+            "...contains the activity to be performed in response to that event.",
+            "...used only to handle graphic event events.",
+            "...can trigger other events while it is running."
+          ],
+          "correctAnswer": "...used only to handle graphic event events."
+        }
+      ]
+    },
+
+    {
+      "quiz": "Week 7 - Programming Technology",
+      "topic": "NetBeans UI and Event Handling",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Which statement is true?",
+          "options": [
+            "The ButtonGroup is used to change the style of the assigned Buttons consistently.",
+            "No more than one RadioButton can be selected in a JFrame at a time.",
+            "ButtonGroup shows the RadioButtons in a visual frame.",
+            "RadioButtons are in mutual exclusion when they are assigned to a ButtonGroup."
+          ],
+          "correctAnswer": "RadioButtons are in mutual exclusion when they are assigned to a ButtonGroup."
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "The NetBeans designer collects the initialization of visual elements in the following method...",
+          "options": [
+            "initComponents",
+            "initApplication",
+            "initControls",
+            "initializeComponents"
+          ],
+          "correctAnswer": "initComponents"
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "The implementation of the event handler code of a button click can be found in the following interface",
+          "options": [
+            "ActionListener",
+            "ButtonClickListener",
+            "EventClickListener",
+            "ActionHandler"
+          ],
+          "correctAnswer": "ActionListener"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "Which method of ActionListener should be implemented when we handle a button event?",
+          "options": ["onEvent", "handleClick", "onClick", "actionPerformed"],
+          "correctAnswer": "actionPerformed"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "What is true about the JList control?",
+          "options": [
+            "JList stores the data, that has to be showned.",
+            "The default model for JList is DefaultContainerModel.",
+            "The type of data stored in the JList model is String.",
+            "In the JList control, the selection of an element can be detected via the valueChanged event."
+          ],
+          "correctAnswer": "In the JList control, the selection of an element can be detected via the valueChanged event."
+        }
+      ]
+    },
+    {
+      "quiz": "Week 8 - Programming Technology",
+      "topic": "Graphics and Swing Components",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Which method of JTextField can be used to get the edited text?",
+          "options": ["getText", "getContent", "setText", "setContent"],
+          "correctAnswer": "getText"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "Which interface should be implemented if we want to be notified of a change in the value of the Slider?",
+          "options": [
+            "ChangeListener",
+            "ValueChangedListener",
+            "StateChangeListener",
+            "ScrollListener"
+          ],
+          "correctAnswer": "ChangeListener"
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "Which method is used to obtain the content of a BufferedImage to draw on it?",
+          "options": ["getContent", "getGraphics", "getBitmap", "getImage"],
+          "correctAnswer": "getGraphics"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "In which method can we redefine the drawing of a Swing UI component?",
+          "options": ["paintComponent", "drawComponent", "paint", "draw"],
+          "correctAnswer": "paintComponent"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Which method of Graphics2D can we use to draw? (Which one is an existing method?)",
+          "options": [
+            "drawPie",
+            "fillRectangle",
+            "drawRoundRect",
+            "clearRectange"
+          ],
+          "correctAnswer": "drawRoundRect"
+        }
+      ]
+    },
+    {
+      "quiz": "Week 9 - Programming Technology",
+      "topic": "JDBC and Database Concepts",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Which statement is part of the Data Query Language?",
+          "options": [
+            "SELECT * FROM table",
+            "UPDATE table SET ...",
+            "CREATE TABLE tablename(...)",
+            "INSERT INTO table (...) VALUES (...)"
+          ],
+          "correctAnswer": "SELECT * FROM table"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "What is the Connection rollback () method used for?",
+          "options": [
+            "Undoes database changes made since the connection was established.",
+            "Revokes a user's access rights.",
+            "Undoes the last transaction that was started but not yet committed.",
+            "Cancels the last issued change request."
+          ],
+          "correctAnswer": "Undoes the last transaction that was started but not yet committed."
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "Which method call is incorrect on the rs variable of type ResultSet?",
+          "options": [
+            "rs.getString(5);",
+            "rs.getInt(2);",
+            "rs.getInt(0);",
+            "rs.getString(\"ADDR\");"
+          ],
+          "correctAnswer": "rs.getInt(0);"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "What do we call as Dirty Read?",
+          "options": [
+            "Reading non committed data.",
+            "Reading data stored in the wrong format.",
+            "We are requesting too much data from the database manager.",
+            "Reading finalized data."
+          ],
+          "correctAnswer": "Reading non committed data."
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "What is true about a good database?",
+          "options": [
+            "Ensures data integrity.",
+            "All columns in each table are indexed.",
+            "May contain redundancy.",
+            "Keys can only consist of a single field."
+          ],
+          "correctAnswer": "Ensures data integrity."
+        }
+      ]
+    },
+    {
+      "quiz": "Week 10 - Programming Technology",
+      "topic": "Advanced Swing: JTable and JPasswordField",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "What type does JPasswordField use to store data?",
+          "options": ["byte[]", "char[]", "String Character[]", "String"],
+          "correctAnswer": "char[]"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "Which statement is true about JTable?",
+          "options": [
+            "The table has a data object that implements the TableModel interface.",
+            "The data is stored in the JTable.",
+            "There is no default (abstract) implementation of TableModel.",
+            "The fireTableStructureChanged method only invalidates the table structure."
+          ],
+          "correctAnswer": "The table has a data object that implements the TableModel interface."
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "Which methods of TableModel need to be implemented for minimal operation?",
+          "options": [
+            "getValueAt",
+            "getColumnName, getValueAt, getColumnClass",
+            "getRowCount, getColumnCount, getValueAt",
+            "getValueAt, getColumnName"
+          ],
+          "correctAnswer": "getRowCount, getColumnCount, getValueAt"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "To display the JTable, the Cell renderer uses the following type - display pair.",
+          "options": [
+            "Number - TextField",
+            "Boolean - CheckBox",
+            "Date - DatePicker",
+            "ImageIcon, Icon - PictureBox"
+          ],
+          "correctAnswer": "Boolean - CheckBox"
+        }
+      ]
+    },
+    {
+      "quiz": "Week 11 - Programming Technology",
+      "topic": "UML State Diagrams and Object States",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Which statement is NOT TRUE about the condition?",
+          "options": [
+            "The state has an identifier so it can be distinguished from the others.",
+            "The state of the object can be described by the specific values of the attributes.",
+            "The state persists as long as the values of the attributes of the objects satisfy the invariant assigned to the state.",
+            "The termination of a state can occur suddenly by itself."
+          ],
+          "correctAnswer": "The termination of a state can occur suddenly by itself."
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "Which statement is FALSE?",
+          "options": [
+            "When the object terminates, the object enters an out-of-system termination state.",
+            "When the object expires, the state of the object is simply cleared.",
+            "The termination of the state occurs as a result of an event.",
+            "When the state of the object terminates, the object enters another state."
+          ],
+          "correctAnswer": "When the object expires, the state of the object is simply cleared."
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "Which statement is true about the state diagram?",
+          "options": [
+            "The nodes of the state diagram graph are events, the edges are state transitions.",
+            "The state diagram can contain several initial states.",
+            "A state diagram is a singly connected directed graph.",
+            "A state diagram is an undirected graph."
+          ],
+          "correctAnswer": "A state diagram is a singly connected directed graph."
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "The complexity of the state diagram can be reduced by the following method(s):",
+          "options": [
+            "Generalization and aggregation of states.",
+            "Aggregation of states.",
+            "No way.",
+            "Generalization of states."
+          ],
+          "correctAnswer": "Generalization and aggregation of states."
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Which statement is true?",
+          "options": [
+            "The invariant of the aggregated and generalized states are the same.",
+            "The invariant of the aggregated state is the disjunction of state invariants of the sub-states.",
+            "The invariant of the generalized state is the disjunction of state invariants of the sub-states.",
+            "The invariant of the generalized state is the conjunction of state invariants of the sub-states."
+          ],
+          "correctAnswer": "The invariant of the generalized state is the disjunction of state invariants of the sub-states."
+        }
+      ]
+    },
+    {
+      "quiz": "Week 12 - Programming Technology",
+      "topic": "UML Activity, Collaboration, and Use Case Diagrams",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "How do we mark the rendezvous point on a flowchart like activity diagram?",
+          "options": [
+            "With a horizontal dashed line",
+            "With a rectangle with rounded corners",
+            "With a horizontal solid line",
+            "With a diamond"
+          ],
+          "correctAnswer": "With a horizontal solid line"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "In the collaboration diagram, between which objects does the collaboration take place?",
+          "options": [
+            "Whose life cycle is interconnected.",
+            "Instantized by the same object.",
+            "Which are connected by an association.",
+            "Which are instances of the same class."
+          ],
+          "correctAnswer": "Which are connected by an association."
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "Which diagram can be considered as an extension of the collaboration diagram?",
+          "options": [
+            "Object diagram",
+            "Class diagram",
+            "Package diagram",
+            "Component diagram"
+          ],
+          "correctAnswer": "Object diagram"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "How do we mark the argument passed in the collaboration diagram during message sending?",
+          "options": [
+            "With the envelope icon on the association.",
+            "With a small arrow starts from a circle.",
+            "With the message ID associated with the association.",
+            "With the arrow pointing from the sender to the recipient."
+          ],
+          "correctAnswer": "With a small arrow starts from a circle."
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "How do we mark on a collaboration diagram if a message has multiple recipients?",
+          "options": [
+            "With several arrows indicated on the association.",
+            "The recipients are indicated by three rectangles that are shifted relative to each other.",
+            "With multiplicity.",
+            "We do not have the opportunity to do that."
+          ],
+          "correctAnswer": "The recipients are indicated by three rectangles that are shifted relative to each other."
+        },
+        {
+          "questionNumber": 6,
+          "questionText": "Which is NOT a part of the user case diagram?",
+          "options": [
+            "Users",
+            "User accounts",
+            "Usage relations",
+            "User cases"
+          ],
+          "correctAnswer": "User accounts"
+        },
+        {
+          "questionNumber": 7,
+          "questionText": "How do we mark the user case on the user case diagram?",
+          "options": [
+            "With a circle",
+            "By making the name of the use case underlined",
+            "With an ellipse",
+            "With a rectangle"
+          ],
+          "correctAnswer": "With an ellipse"
+        }
+      ]
+    },
+    {
+      "quiz": "Lecture 2 - Software Technology",
+      "topic": "Requirements Analysis and Use Cases",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Which one is false? Requirements elicitation and analysis can be more difficult because ...",
+          "options": [
+            "customers are direct users of the software.",
+            "customers do not have IT skills.",
+            "buyers are uncertain about expectations.",
+            "customers do not clearly express their expectations."
+          ],
+          "correctAnswer": "customers are direct users of the software."
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "Which relation type is not part of the use case diagram?",
+          "options": ["Invokes", "Composition", "Precedes", "Extend"],
+          "correctAnswer": "Composition"
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "Which one is not a non-functional requirement?",
+          "options": [
+            "Description of services, reactions",
+            "External requirements",
+            "Management requirements",
+            "Product requirements"
+          ],
+          "correctAnswer": "Description of services, reactions"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "What is the structure of the user story?",
+          "options": [
+            "GIVEN environment WHEN activity THEN effect",
+            "USER user IN USE CASE use case WITH RELATION relation",
+            "AS A role USE function TO goal",
+            "WHEN activity APPLYING function IN ORDER TO goal"
+          ],
+          "correctAnswer": "GIVEN environment WHEN activity THEN effect"
+        }
+      ]
+    },
+    {
+      "quiz": "Lecture 3 - Software Technology",
+      "topic": "System Design and Architecture",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Which statement is false about the design phases?",
+          "options": [
+            "Existing classes can be further specified at each stage.",
+            "Classes that become complex can be split up to less complex classes.",
+            "We can introduce new classes in each phase.",
+            "We need to put functionally fragmented classes into one package."
+          ],
+          "correctAnswer": "We need to put functionally fragmented classes into one package."
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "How many principles should we follow according to the SOLID principle?",
+          "options": ["5", "3", "6", "4"],
+          "correctAnswer": "5"
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "What is software architecture?",
+          "options": [
+            "The way software is deployed to the hardware architecture.",
+            "Software component diagram.",
+            "A set of primary design decisions made during software development.",
+            "The class structure from which we build the package diagram."
+          ],
+          "correctAnswer": "A set of primary design decisions made during software development."
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "For which architecture is it most difficult to separate the functions of the program?",
+          "options": [
+            "Model-view architecture",
+            "Monolithic architecture",
+            "Model-view-presentation architecture",
+            "Model-view-controller architecture"
+          ],
+          "correctAnswer": "Monolithic architecture"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "What can't be a program component?",
+          "options": [
+            "Component. (Artifact)",
+            "Program library. (Class library)",
+            "Executable file. (Executable)"
+          ],
+          "correctAnswer": "Component. (Artifact)"
+        },
+        {
+          "questionNumber": 6,
+          "questionText": "Which one is not part of the system plan?",
+          "options": [
+            "User interface plan",
+            "Dynamic plan",
+            "Static plan",
+            "Cost estimation"
+          ],
+          "correctAnswer": "Cost estimation"
+        }
+      ]
+    },
+    {
+      "quiz": "Lecture 4 - Software Technology",
+      "topic": "Object-Oriented Design Principles",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Which SOLID principle makes it possible to implement the polymorphism?",
+          "options": ["DIP", "SRP", "OCP", "LSP", "ISP"],
+          "correctAnswer": "LSP"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "Which statement is false about the Single Responsibility Principle?",
+          "options": [
+            "Excessive use of SRP can break the program structure.",
+            "Facilitates loose connection of program units.",
+            "If the SRP principle is violated, so is the Open / Closed Principle.",
+            "A program unit can have only one responsibility."
+          ],
+          "correctAnswer": "If the SRP principle is violated, so is the Open / Closed Principle."
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "Which statement is false? The Liskov substitution principle ...",
+          "options": [
+            "... prohibits extending the type of exceptions.",
+            "... allows the weakening of invariants.",
+            "... expects a covariance of return values.",
+            "... expects the contravariance of parameters."
+          ],
+          "correctAnswer": "... allows the weakening of invariants."
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "Which statement is true for the Inverse Dependencies principle?",
+          "options": [
+            "The object instantiates the classes directly on its own.",
+            "We should not transform concrete classes.",
+            "Specific classes communicate with each other through abstraction.",
+            "Class fields contain instances of specific classes."
+          ],
+          "correctAnswer": "Specific classes communicate with each other through abstraction."
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "How can we NOT inject dependency?",
+          "options": [
+            "Through a constructor parameter.",
+            "Through a setter method.",
+            "Using an interface where the client realizes the setter method.",
+            "Using the singleton design pattern."
+          ],
+          "correctAnswer": "Using the singleton design pattern."
+        }
+      ]
+    },
+    {
+      "quiz": "Lecture 5 - Software Technology",
+      "topic": "Git and Version Control Systems",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "What is not appropriate to use tickets in a project management tool?",
+          "options": [
+            "Documentation task",
+            "New functionality",
+            "Error / bug",
+            "Sprint closing discussion"
+          ],
+          "correctAnswer": "Sprint closing discussion"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "What does a ticket not specify?",
+          "options": [
+            "The responsible person for the task",
+            "Task cost",
+            "Task description",
+            "Task deadline"
+          ],
+          "correctAnswer": "Task cost"
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "Which statement is false about version control systems?",
+          "options": [
+            "We can use it to store all previous program versions.",
+            "It allows to check changes.",
+            "With its use, we do not need to deal with conflicts.",
+            "Allows to undo changes."
+          ],
+          "correctAnswer": "With its use, we do not need to deal with conflicts."
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "Which statement applies to distributed version control systems?",
+          "options": [
+            "Known implementations e.g. CVS, SVN, SourceSafe",
+            "Communication is peer-to-peer, but it is possible to set up dedicated servers.",
+            "Performs file-based operations.",
+            "Concurrency management is typically done by merging before submission."
+          ],
+          "correctAnswer": "Communication is peer-to-peer, but it is possible to set up dedicated servers."
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "With which command in git can we synchronize the new version created in our local storage to remote storage?",
+          "options": ["git synchronize", "git push", "git commit", "git pull"],
+          "correctAnswer": "git push"
+        }
+      ]
+    },
+    {
+      "quiz": "Lecture 6 - Software Technology",
+      "topic": "Software Testing Methodologies",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Which statement is true about verification?",
+          "options": [
+            "Dynamic analysis is not suitable for measuring program performance.",
+            "Dynamic analysis can reveal errors resulting from program unit interactions.",
+            "Static analysis can be performed only when the full program code is known.",
+            "Despite the static analysis, it is not guaranteed that the errors will be covered by each other."
+          ],
+          "correctAnswer": "Dynamic analysis can reveal errors resulting from program unit interactions."
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "Testing ...",
+          "options": [
+            "... is used to search for runtime errors, abnormalities, compatibility issues.",
+            "... guarantees that the program is error free.",
+            "... guarantees that the program is valid in all circumstances.",
+            "... aims to detect errors at compile time."
+          ],
+          "correctAnswer": "... is used to search for runtime errors, abnormalities, compatibility issues."
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "Which statement is true?",
+          "options": [
+            "The user test typically consists of black box tests.",
+            "The developer test typically consists of black box tests.",
+            "The release test is performed by the development team.",
+            "The smoke test is performed by measuring the amount of smoke rising from the power supply unit."
+          ],
+          "correctAnswer": "The user test typically consists of black box tests."
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "The correct order of developer test steps is:",
+          "options": [
+            "unit test, system test, integration test",
+            "integration test, unit test, system test",
+            "system test, integration test, unit test",
+            "unit test, integration test, system test"
+          ],
+          "correctAnswer": "unit test, integration test, system test"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Which statement is false?",
+          "options": [
+            "The first step in integration and system testing is the smoke test.",
+            "The amount of program code tested by test collections is called code coverage.",
+            "During the release test and the user test, the software should usually work with actual data in the target environment.",
+            "The release test does not include deployment (e.g. installation)."
+          ],
+          "correctAnswer": "The release test does not include deployment (e.g. installation)."
+        }
+      ]
+    },
+    {
+      "quiz": "Lecture 7 - Software Technology",
+      "topic": "Maven and Build Tools",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Which task does the build system not perform?",
+          "options": [
+            "Automatically upload changed project files to a version tracker",
+            "Perform automated tests",
+            "Compiling the program",
+            "Dependency management"
+          ],
+          "correctAnswer": "Automatically upload changed project files to a version tracker"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "Which one is not a build system?",
+          "options": ["Maven", "Cthulhu", "Gradle", "Ant"],
+          "correctAnswer": "Cthulhu"
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "What is the name of the Maven build system project file?",
+          "options": ["build.xml", "pom.xml", "pom.pom", "build.pom"],
+          "correctAnswer": "pom.xml"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "What is the abbreviation for GAV in the Maven system?",
+          "options": [
+            "Group, Artifact Id, Version",
+            "Genuine Application Verifier",
+            "Group, Application Id, Version",
+            "Graphical Advanced Visualizer"
+          ],
+          "correctAnswer": "Group, Artifact Id, Version"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Which statement is true about the content of pom.xml?",
+          "options": [
+            "modelVersion: the version number of the model layer of the application",
+            "artifactId: unique name of the project",
+            "version: the minimum Maven version required for translation",
+            "groupId: the ID of the module development team within the company"
+          ],
+          "correctAnswer": "artifactId: unique name of the project"
+        }
+      ]
+    },
+    {
+      "quiz": "Lecture 8 - Software Technology",
+      "topic": "CI/CD and Build Automation",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "The goal of continuous integration is ...",
+          "options": [
+            "... storage and retrieval of program versions.",
+            "... immediate, automated filtering of possible bugs, integration problems, feedback to developers.",
+            "... automatic delivery of the created software to the users.",
+            "... transforming a code consisting of several smaller parts into a larger, coherent code base."
+          ],
+          "correctAnswer": "... immediate, automated filtering of possible bugs, integration problems, feedback to developers."
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "The goal of continuous delivery is ...",
+          "options": [
+            "... ensuring continuous interaction of self-organizing, small teams with quick feedback.",
+            "... automating ongoing expenses.",
+            "... implementing rapid application development on an incremental basis.",
+            "... so that the program codes can be stored in a central repository several times a day using a version control system."
+          ],
+          "correctAnswer": "... implementing rapid application development on an incremental basis."
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "What do we call the interdependent tasks of continuous integration and continuous delivery?",
+          "options": ["task", "module", "job", "milestone"],
+          "correctAnswer": "job"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "In what language can the Git CI / CD configuration be described?",
+          "options": ["YAML", "PHP", "XML", "XAML"],
+          "correctAnswer": "YAML"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Which of the following is not related to continuous integration?",
+          "options": ["GitLab", "Jetlag", "Travis", "AppVeyor"],
+          "correctAnswer": "Jetlag"
+        }
+      ]
+    },
+    {
+      "quiz": "Lecture 9 - Software Technology",
+      "topic": "Code Quality and Test-Driven Development",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Which is NOT part of the three rules of the TDD?",
+          "options": [
+            "Write just enough of a test to demonstrate the error.",
+            "DO NOT encode anything except what is necessary for our program to pass the failed test.",
+            "Successful testing is always followed by refactoring.",
+            "Write only as much code as is sufficient for a successful test."
+          ],
+          "correctAnswer": "Successful testing is always followed by refactoring."
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "What is true about TDD?",
+          "options": [
+            "The final code should work well enough in the last test cases introduced.",
+            "It is enough to encode only what is needed at the moment.",
+            "The tests cover only a subset of possible uses.",
+            "As a result, we get a structured code that satisfies the tests but still needs to be refactored."
+          ],
+          "correctAnswer": "The tests cover only a subset of possible uses."
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "What features are typical of Clean Code?",
+          "options": [
+            "Readable, concise, self-documenting",
+            "Readable, maintainable, testable, elegant",
+            "Well documented, tested, elegant",
+            "Easy to read, no repetition, testable"
+          ],
+          "correctAnswer": "Readable, maintainable, testable, elegant"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "What is NOT a typical reason for the constant change in the code?",
+          "options": [
+            "requirement changes",
+            "improve code quality",
+            "bug fixes",
+            "introduction of new features"
+          ],
+          "correctAnswer": "improve code quality"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Which concept is part of the Clean Code?",
+          "options": [
+            "The break and continue statements should be used with caution.",
+            "Always abbreviate variable names",
+            "Do not use the same name for different purposes",
+            "Use prefixes for names"
+          ],
+          "correctAnswer": "Do not use the same name for different purposes"
+        },
+        {
+          "questionNumber": 6,
+          "questionText": "Which statement is false about the methods in the Clean Code?",
+          "options": [
+            "A method can implement multiple levels of abstraction.",
+            "Blocks must have a clear entry and exit point (break, continue is not allowed).",
+            "The implementation should fit on one screen.",
+            "Do not repeat ourselves in the code (DRY)."
+          ],
+          "correctAnswer": "A method can implement multiple levels of abstraction."
+        },
+        {
+          "questionNumber": 7,
+          "questionText": "Which statement is true about the Clean Code?",
+          "options": [
+            "Functions can simultaneously answer a question and perform something.",
+            "The comment helps you understand the hard-to-understand code.",
+            "We use both error codes and exceptions.",
+            "Code and comment do not necessarily coexist."
+          ],
+          "correctAnswer": "Code and comment do not necessarily coexist."
+        }
+      ]
+    },
+    {
+      "quiz": "Lecture 10 - Software Technology",
+      "topic": "Advanced Threading Concepts",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Which thread runs the activities responsible for event handling?",
+          "options": ["ELT", "DBT", "DDT", "EDT"],
+          "correctAnswer": "EDT"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "Which thread state does not exist?",
+          "options": ["Suspended", "Running", "Stopped", "Resumed"],
+          "correctAnswer": "Stopped"
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "What is the default priority of threads?",
+          "options": ["0", "1", "10", "5"],
+          "correctAnswer": "5"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "Which method of the Thread object can be used to start a new thread?",
+          "options": ["run", "execute", "spawn", "start"],
+          "correctAnswer": "start"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Which method can a thread use to give its CPU time to other threads?",
+          "options": ["interrupt", "sleep", "wait", "suspend"],
+          "correctAnswer": "sleep"
+        },
+        {
+          "questionNumber": 6,
+          "questionText": "Which method of a thread can be called to wait for the thread to complete?",
+          "options": ["Stop", "join", "wait", "await"],
+          "correctAnswer": "join"
+        },
+        {
+          "questionNumber": 7,
+          "questionText": "What does starvation mean in a parallel environment?",
+          "options": [
+            "Threads do not give up their used resources.",
+            "By the time the program is willing to complete, the user has long starved to death.",
+            "The threads in the parallel program cannot start because the operating system was previously in a zombie state.",
+            "A thread cannot access the desired resource for an extended period of time because other long-running threads receive it earlier."
+          ],
+          "correctAnswer": "A thread cannot access the desired resource for an extended period of time because other long-running threads receive it earlier."
+        },
+        {
+          "questionNumber": 8,
+          "questionText": "An object is used as a lock. Which method of it can be used to wake up a thread, that is waiting for that object?",
+          "options": ["wake", "wait", "spotify", "notify"],
+          "correctAnswer": "notify"
+        },
+        {
+          "questionNumber": 9,
+          "questionText": "What is true for an immutable object?",
+          "options": [
+            "The state of the object cannot be changed after the constructor has run.",
+            "Its attributes can only be changed using setter methods.",
+            "Its attributes cannot be changed in the object. But, in case of references, it is allowed on the objects accessible through them.",
+            "We cannot store a reference to other objects in the object."
+          ],
+          "correctAnswer": "The state of the object cannot be changed after the constructor has run."
+        }
+      ]
+    },
+    {
+      "quiz": "Lecture 11 - Software Technology",
+      "topic": "Design Patterns in Software Engineering",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Which one is a NON-EXISTING group of design patterns?",
+          "options": ["Structural", "Implementation", "Creation", "Behavioral"],
+          "correctAnswer": "Implementation"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "Which design pattern was classified in the wrong class?",
+          "options": [
+            "Builder - Creation Pattern",
+            "Chain of responsibility - Behavior pattern",
+            "Singleton - Creation pattern",
+            "Flyweight - Behavioral Pattern"
+          ],
+          "correctAnswer": "Flyweight - Behavioral Pattern"
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "With which design pattern can we reduce the required memory by sharing the common parts of the state among several objects in a new object?",
+          "options": ["Proxy", "Adapter", "Flyweight", "Composite"],
+          "correctAnswer": "Flyweight"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "Which design pattern provides a simplified interface to a library, framework, etc.?",
+          "options": ["Proxy", "Facade", "Adapter", "Bridge"],
+          "correctAnswer": "Facade"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Which design pattern translates a class interface to another compatible interface?",
+          "options": ["Facade", "Bridge", "Adapter", "Proxy"],
+          "correctAnswer": "Adapter"
+        },
+        {
+          "questionNumber": 6,
+          "questionText": "Which design pattern allows requests to be forwarded along the chain of handlers?",
+          "options": [
+            "Builder",
+            "Bridge",
+            "Mediator",
+            "Chain of Responsibility"
+          ],
+          "correctAnswer": "Chain of Responsibility"
+        },
+        {
+          "questionNumber": 7,
+          "questionText": "Which design pattern can reduce dependencies between objects?",
+          "options": ["Factory method", "Bridge", "Mediator", "Adapter"],
+          "correctAnswer": "Mediator"
+        },
+        {
+          "questionNumber": 8,
+          "questionText": "Which design pattern allows you to iterate over the items of a collection without knowing how to represent the elements?",
+          "options": ["Memento", "Strategy", "Mediator", "Iterator"],
+          "correctAnswer": "Iterator"
+        }
+      ]
+    }
+  ]
+}
