@@ -1248,6 +1248,777 @@
           "correctAnswer": "Iterator"
         }
       ]
+    },
+    {
+      "quiz": "Threads and Concurrency",
+      "topic": "Multithreading in Java",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Sequence diagrams illustrate interactions between objects on a time axis going from the top to the bottom of the diagram. The lifeline of an object is the dashed line. The messages passed (that is, the method calls) between the objects are shown as the arrows. On the figure the arrows denote locking resources. We know that both threads need both resources. At which method call can we be sure that there is a deadlock?",
+          "options": ["At method 1"],
+          "correctAnswer": "At method 3",
+          "image": "https://i.imgur.com/I6TEXeZ.png"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "What will be the result of calling the wait() method of an object if the calling thread doesn't possess the monitor lock?",
+          "options": ["IllegalMonitorStateException will be thrown"],
+          "correctAnswer": "IllegalMonitorStateException will be thrown"
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "What is the default priority of threads?",
+          "options": ["Default priority of a thread is 5 (NORM_PRIORITY)"],
+          "correctAnswer": "Default priority of a thread is 5 (NORM_PRIORITY)"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "Which possible outputs can this running code produce?",
+          "options": [
+            "99999, 99997, 99977, 99777, 97777, 77777 ... 9 can't follow a 7"
+          ],
+          "correctAnswer": "99999, 99997, 99977, 99777, 97777, 77777 ... 9 can't follow a 7",
+          "image": "https://i.imgur.com/DH35Kie.png"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "What will be the result when running this code?",
+          "options": ["19"],
+          "correctAnswer": "19",
+          "image": "https://imgur.com/a/ekJijrI"
+        },
+        {
+          "questionNumber": 6,
+          "questionText": "What will be the result when running this code?",
+          "options": ["False False"],
+          "correctAnswer": "False False",
+          "image": "https://i.imgur.com/Zeo5T3H.png"
+        },
+        {
+          "questionNumber": 7,
+          "questionText": "Which of these are atomic operations?",
+          "options": [
+            "Reading/writing reference variables",
+            "Reading/writing of all primitive types",
+            "Both",
+            "None of the above"
+          ],
+          "correctAnswer": "Reading/writing reference variables"
+        },
+        {
+          "questionNumber": 8,
+          "questionText": "Which statement is true of this code?",
+          "options": [
+            "We can make the class thread-safe, if we make the run method synchronized.",
+            "The class is thread-safe.",
+            "We can make the class thread-safe, if we make the foo method static.",
+            "This code throws an exception at runtime."
+          ],
+          "correctAnswer": "The class is thread-safe.",
+          "image": "https://i.imgur.com/NGof5Mx.png"
+        },
+        {
+          "questionNumber": 9,
+          "questionText": "Which of these statements about immutable classes is not true?",
+          "options": [
+            "The class should be final to avoid inheritance.",
+            "All the attributes of the class should be declared as private final.",
+            "We have to make a copy of the objects stored in attributes, when we return it in a getter method.",
+            "The class should not contain any kind of methods, that change the state after the constructor."
+          ],
+          "correctAnswer": "All the attributes of the class should be declared as private final."
+        }
+      ]
+    },
+    {
+      "quiz": "JDBC",
+      "topic": "Java Database Connectivity",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Which of these SQL statements are DML statements?",
+          "options": [
+            "update [table] set ...",
+            "delete from [table] ...",
+            "alter table ...",
+            "insert into [table] ...",
+            "update [table] set ..., delete from [table] ..., insert into [table] ..."
+          ],
+          "correctAnswer": "update [table] set ..., delete from [table] ..., insert into [table] ..."
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "Which of these is an incorrect way to access the data in a ResultSet?",
+          "options": [
+            "String value0 = rs.getString(0);",
+            "String value1 = rs.getString(1);",
+            "int value2 = rs.getInt(2);",
+            "int value3 = rs.getInt(\"ADDR_LN1\");"
+          ],
+          "correctAnswer": "String value0 = rs.getString(0);"
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "What information cannot be obtained from the SQLException object?",
+          "options": [
+            "SQL status code.",
+            "Driver / Database specific error code.",
+            "Database request causing the error.",
+            "Description of the error that occurred."
+          ],
+          "correctAnswer": "Database request causing the error."
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "Which of the following statements is true?(If it has option D then D is correct if not A is correct)",
+          "options": [
+            "CallableStatement extends the PreparedStatement interface. This interface can be used to call SQL stored procedures.",
+            "Statement extends the PreparedStatement interface and is used when the SQL query does not need to be run multiple times.",
+            "PreparedStatement is used to start static queries (eg select * from table), therefore PreparedStatements cannot be parameterize",
+            "Batch processing of SQL statements is possible using PreparedStatement.",
+            "CallableStatement extends the PreparedStatement interface. This interface can be used to call SQL stored procedures., Batch processing of SQL statements is possible using PreparedStatement. "
+          ],
+          "correctAnswer": "CallableStatement extends the PreparedStatement interface. This interface can be used to call SQL stored procedures., Batch processing of SQL statements is possible using PreparedStatement. "
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Which of the following statements is true?",
+          "options": [
+            "PreparedStatement extends the CallableStatement interface. This interface can be used to call SQL stored procedures.",
+            "Statement extends the PreparedStatement interface and is used when the SQL query does not need to be run multiple times.",
+            "PreparedStatement is used to start static queries (eg select * from table), therefore PreparedStatements cannot be parameterized.",
+            "Batch processing of SQL statements is possible using PreparedStatement."
+          ],
+          "correctAnswer": "Batch processing of SQL statements is possible using PreparedStatement."
+        },
+        {
+          "questionNumber": 6,
+          "questionText": "How to start a new database transaction?",
+          "options": [
+            "By requesting a Transaction object from Connection and calling that begin () method.",
+            "By requesting a Transaction object from Connection and setting its autoCommit property to false.",
+            "By calling the beginTransaction method of the Connection.",
+            "By setting the autoCommit property of the Connection to false and executing an SQL statement."
+          ],
+          "correctAnswer": "By setting the autoCommit property of the Connection to false and executing an SQL statement."
+        },
+        {
+          "questionNumber": 7,
+          "questionText": "When do we use the transaction on databases?",
+          "options": [
+            "To run stored procedures",
+            "To perform multiple operations atomically",
+            "For a linked table query",
+            "To name transfers"
+          ],
+          "correctAnswer": "To perform multiple operations atomically"
+        },
+        {
+          "questionNumber": 8,
+          "questionText": "Which connection is usually interpreted with a connection table?",
+          "options": [
+            "1-n connection",
+            "m-1 connection",
+            "m-n connection",
+            "1-1 connection"
+          ],
+          "correctAnswer": "m-n connection"
+        },
+        {
+          "questionNumber": 9,
+          "questionText": "Which one is not part of the Entity-Relationship diagram?",
+          "options": ["Attribute", "Entity", "Keys", "Class"],
+          "correctAnswer": "Class"
+        },
+        {
+          "questionNumber": 10,
+          "questionText": "Which one is not true about the relationship between JTable and the model?",
+          "options": [
+            "JTable does not contain data",
+            "The model can be redefined",
+            "The model cannot notify JTable of the change",
+            "The representation of the model may differ from the data queried by JTable"
+          ],
+          "correctAnswer": "The model cannot notify JTable of the change"
+        }
+      ]
+    },
+    {
+      "quiz": "Software Technology / UML",
+      "topic": "Software Engineering and UML Diagrams",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "What are the principal quality metrics of software?",
+          "options": [
+            "Delivery time, implementation cost, hardware and software requirements.",
+            "Maintainability, reliability, safety, efficiency, usability.",
+            "Modifiability, Extensibility, Resolution, Reusability, Reliability.",
+            "Ergonomics, usability, compatibility, hardware and software requirements."
+          ],
+          "correctAnswer": "Maintainability, reliability, safety, efficiency, usability."
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "Which of these is the structure of a user story?",
+          "options": [
+            "USER … IN USE CASE … WITH RELATION …",
+            "AS A … USE … TO …",
+            "WHEN … APPLYING … IN ORDER TO …",
+            "GIVEN … WHEN … THEN …"
+          ],
+          "correctAnswer": "GIVEN … WHEN … THEN …"
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "What is the correct order of requirements analysis steps?",
+          "options": [
+            "feasibility analysis, requirement exploration, requirement specification, requirement validation",
+            "requirement exploration, requirement specification, requirement validation, feasibility analysis",
+            "requirement exploration, requirement validation, requirement specification, feasibility analysis",
+            "requirement exploration, requirement specification, feasibility analysis, requirement validation"
+          ],
+          "correctAnswer": "feasibility analysis, requirement exploration, requirement specification, requirement validation"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "Which of these is not a software development process?",
+          "options": ["waterfall", "evolution", "scrum", "prototyping"],
+          "correctAnswer": "evolution"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Which of these are the relations of a UML use case diagram?",
+          "options": [
+            "dependency, composition, usage, nesting",
+            "precedes, include, usage, generalization",
+            "usage, nesting, import), dependency",
+            "interface, implementation, include"
+          ],
+          "correctAnswer": "precedes, include, usage, generalization"
+        },
+        {
+          "questionNumber": 6,
+          "questionText": "What is the UML deployment diagram used for?",
+          "options": [
+            "Describe the sequence of steps required to install the software on a given machine.",
+            "It depicts all the error possibilities that you may encounter during installation.",
+            "Describe the software components according to how to install them in an installation package.",
+            "Depict the physical placement of software components (on different machines) with the required software environment."
+          ],
+          "correctAnswer": "Depict the physical placement of software components (on different machines) with the required software environment."
+        },
+        {
+          "questionNumber": 7,
+          "questionText": "Which OOP design principle is violated by the singleton design pattern? The singleton pattern guarantees that there is only a single instance created from a class which can be accessed through a static method.",
+          "options": [
+            "Single Responsibility Principle",
+            "Open/Closed Principle",
+            "Liskov Substitution Principle",
+            "Dependency Inversion Principle"
+          ],
+          "correctAnswer": "Single Responsibility Principle"
+        },
+        {
+          "questionNumber": 8,
+          "questionText": "Which of these techniques can be used to implement dependency inversion?",
+          "options": [
+            "observer",
+            "MVC (modell-view-controller)",
+            "dependency injection",
+            "generalization"
+          ],
+          "correctAnswer": "dependency injection"
+        },
+        {
+          "questionNumber": 9,
+          "questionText": "What is Test Driven Development (TDD)?",
+          "options": [
+            "A software development method in which tests are written before the actual program code is written.",
+            "Test method to ensure that test cases cover all program units and are performed in the appropriate order.",
+            "A general principle that states that all instructions in program code should be verified using unit tests (100% code coverage).",
+            "A testing method in which unit tests are first performed on classes (and their methods), then integration tests are used to check the combined behavior of the classes, and finally system tests are used to check the behavior of the entire software."
+          ],
+          "correctAnswer": "A software development method in which tests are written before the actual program code is written."
+        },
+        {
+          "questionNumber": 10,
+          "questionText": "Which the following features is not provided by unit testing frameworks?",
+          "options": [
+            "Create manual test cases in separate program units (classes).",
+            "Generate test cases automatically, that covers all scenarios, by analyzing the code.",
+            "Assert statements, which compare the expected and the return values.",
+            "Creation of test reports, which lists the passed/failed tests."
+          ],
+          "correctAnswer": "Generate test cases automatically, that covers all scenarios, by analyzing the code."
+        },
+        {
+          "questionNumber": 12,
+          "questionText": "In the case of Unit testing, the parts of the program must be separated from each other and boundaries must be established between them. One possible solution to this is to use objects that mimic the behavior of other objects. What are these objects called?",
+          "options": ["Mock objects", "Modules", "Units", "Atoms"],
+          "correctAnswer": "Mock objects"
+        },
+        {
+          "questionNumber": 13,
+          "questionText": "What is the starting point of object-oriented design?",
+          "options": [
+            "Functions",
+            "Activities",
+            "Entities and relations",
+            "Architecture"
+          ],
+          "correctAnswer": "Entities and relations"
+        },
+        {
+          "questionNumber": 14,
+          "questionText": "How do we express that an object is related to several objects of a class?",
+          "options": [
+            "With composition",
+            "With multiplicity",
+            "With an array type attribute",
+            "With aggregation"
+          ],
+          "correctAnswer": "With multiplicity"
+        },
+        {
+          "questionNumber": 15,
+          "questionText": "Which of these can we assign constraints to on a class diagram?",
+          "options": ["Relation", "Attribute", "Method parameters", "All"],
+          "correctAnswer": "All"
+        },
+        {
+          "questionNumber": 16,
+          "questionText": "Which of these relations is between classes?",
+          "options": [
+            "Association",
+            "Dependency",
+            "Inheritance",
+            "Aggregation"
+          ],
+          "correctAnswer": "Inheritance"
+        },
+        {
+          "questionNumber": 17,
+          "questionText": "Which diagram is not part of the dynamic model?",
+          "options": [
+            "State diagram",
+            "Sequence diagram",
+            "Activity diagram",
+            "Component diagram"
+          ],
+          "correctAnswer": "Component diagram"
+        },
+        {
+          "questionNumber": 18,
+          "questionText": "What cannot have a state on a state diagram?",
+          "options": ["Name", "Invariant", "Precondition", "Parameter"],
+          "correctAnswer": "Parameter"
+        },
+        {
+          "questionNumber": 19,
+          "questionText": "Which method can reduce the complexity of the state diagram?",
+          "options": [
+            "Generalization",
+            "Aggregation",
+            "By generalization and aggregation",
+            "None of the others"
+          ],
+          "correctAnswer": "By generalization and aggregation"
+        },
+        {
+          "questionNumber": 20,
+          "questionText": "Which statement is true?",
+          "options": [
+            "The invariant of generalization is the disjunction of the invariants of states",
+            "The invariant of generalization is the conjunction of the invariants of states",
+            "The invariant of aggregation is the disjunction of the invariants of states",
+            "The states obtained by the two methods have no invariant"
+          ],
+          "correctAnswer": "The invariant of generalization is the disjunction of the invariants of states"
+        },
+        {
+          "questionNumber": 21,
+          "questionText": "Which diagrams are part of the static model?",
+          "options": [
+            "Class Diagram, Object Diagram",
+            "Class Diagram, State Diagram",
+            "Object diagram, Sequence diagram",
+            "Object Diagram, Activity Diagram"
+          ],
+          "correctAnswer": "Class Diagram, Object Diagram"
+        },
+        {
+          "questionNumber": 22,
+          "questionText": "Based on the following implementation, which relationship exists exactly between the car and the engine?",
+          "options": [
+            "Association",
+            "Aggregation",
+            "Composition",
+            "Generalization"
+          ],
+          "correctAnswer": "Aggregation",
+          "image": "https://i.imgur.com/FsgUjSx.png"
+        },
+        {
+          "questionNumber": 24,
+          "questionText": "Based on the following implementation, which relationship exists exactly between the car and the engine?\n\npublic class Car {\n    private final Engine engine;\n    public Car(int engineCapacity, int engineSerialNumber) {\n        this.engine = new Engine(engineCapacity, engineSerialNumber);\n    }\n    public int getEngineCapacity() {\n        return engine.getEngineCapacity();\n    }\n    public int getEngineSerialNumber(){\n        return engine.getEngineSerialNumber();\n    }\n}",
+          "options": [
+            "Association",
+            "Aggregation",
+            "Composition",
+            "Generalization"
+          ],
+          "correctAnswer": "Composition",
+          "image": "https://i.imgur.com/zq7z5Ia.png"
+        },
+        {
+          "questionNumber": 25,
+          "questionText": "What is the relationship between the Person and Phone classes in the class diagram below?",
+          "options": [
+            "Association",
+            "Aggregation",
+            "Composition",
+            "Generalization"
+          ],
+          "correctAnswer": "Association",
+          "image": "https://i.imgur.com/0xqgOTD.png"
+        }
+      ]
+    },
+    {
+      "quiz": "Implementation Related Questions",
+      "topic": "Java Collections and Implementation",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "What kind of methods do we have to implement when we would like to use instances of our own class as keys in a HashMap?",
+          "options": [
+            "== operator",
+            "hashCode(…) method",
+            "equals(…) method",
+            "hashCode(…) and equals(…) methods"
+          ],
+          "correctAnswer": "hashCode(…) and equals(…) methods"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "Which of the following options should you choose if you want to apply mainly an index-based search to a dynamically changing data set where the same element can occur more than once? (We only want to add a new item to the end of the collection, we don't want to delete it from the collection often.)",
+          "options": ["ArrayList", "LinkedList", "Array", "HashSet"],
+          "correctAnswer": "ArrayList"
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "Which implementation to choose from the following options if you want to use a collection that does not contain duplicate items and you do not need to store the items in the order of insertion or in ascending order of values?",
+          "options": ["List", "TreeSet", "LinkedHashSet", "HashSetArrayList"],
+          "correctAnswer": "LinkedHashSet"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "Which of the following implementations of interfaces are used to store key-value pairs?",
+          "options": ["List", "Set", "Map", "Collection"],
+          "correctAnswer": "Map"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Which of these statements is true?",
+          "options": [
+            "A final abstract class must have at least one abstract method",
+            "An abstract class has at least one abstract method",
+            "All the attributes of a final class are final",
+            "The derived class of an abstract class can be also abstract"
+          ],
+          "correctAnswer": "The derived class of an abstract class can be also abstract"
+        },
+        {
+          "questionNumber": 6,
+          "questionText": "Which of these statements is false?",
+          "options": [
+            "We cannot derive from a final class",
+            "Interfaces cannot be derived",
+            "A class can implement multiple interfaces",
+            "We have to implement all methods of the interface in a final class"
+          ],
+          "correctAnswer": "Interfaces cannot be derived"
+        },
+        {
+          "questionNumber": 7,
+          "questionText": "Which of these can be a generic parameter?",
+          "options": [
+            "Primitive type",
+            "Class",
+            "Interface",
+            "Class, that implements the methods used in the generic"
+          ],
+          "correctAnswer": "Class, that implements the methods used in the generic"
+        },
+        {
+          "questionNumber": 8,
+          "questionText": "Which collection can be indexed?",
+          "options": ["HashSet", "HashMap", "Vector", "TreeMap"],
+          "correctAnswer": "Vector"
+        },
+        {
+          "questionNumber": 9,
+          "questionText": "What can be static in JAVA?",
+          "options": [
+            "Class field",
+            "Method",
+            "Class / interface",
+            "Enumeration",
+            "Class field, Method, Enumeration"
+          ],
+          "correctAnswer": "Class field, Method, Enumeration"
+        },
+        {
+          "questionNumber": 10,
+          "questionText": "What does Java support about multiple specialization and multiple generalizations?",
+          "options": ["Generalization", "Specialization", "Both", "None"],
+          "correctAnswer": "Specialization"
+        }
+      ]
+    },
+    {
+      "quiz": "Software Development Methodologies and Models",
+      "topic": "Agile and Scrum",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "Which of the following is not an agile principle?",
+          "options": [
+            "Prefer the methodology instead of the tools",
+            "Prefer the operating software instead of a comprehensive documentation",
+            "Prefer cooperation with the client instead of enforcing the contractual negotiations",
+            "Prefer responding to changes instead of following the plan."
+          ],
+          "correctAnswer": "Prefer the methodology instead of the tools"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "Which statement is not true about the sprint?",
+          "options": [
+            "The product is all designed, coded and tested within the sprint.",
+            "The result of the sprint is a working code representing business value.",
+            "Once tasks and times have been defined, only the product owner will be involved in the work of the team.",
+            "The Scrum team works in a self-organizing way throughout the sprint."
+          ],
+          "correctAnswer": "Once tasks and times have been defined, only the product owner will be involved in the work of the team."
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "Which statement is true for the Scrum Master?",
+          "options": [
+            "Scrum Master is the manager of the Scrum team",
+            "The Scrum Master leads the daily Scrum",
+            "Scrum Master is not responsible for protecting the work of the SCRUM team from outside influences",
+            "Scrum Master is responsible for the processes"
+          ],
+          "correctAnswer": "Scrum Master is responsible for the processes"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "Which statement is true for daily Scrum?",
+          "options": [
+            "The daily Scrum is led by the Scrum Master.",
+            "During the daily Scrum, team members report to the Scrum Master on their progress.",
+            "During the daily Scrum, the goal is to remove obstacles that affect the team.",
+            "The daily Scrum can last up to 15 minutes."
+          ],
+          "correctAnswer": "The daily Scrum can last up to 15 minutes."
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Test-driven development (TDD) is a software development methodology according to which…",
+          "options": [
+            "the tests must be written before the actual program code is implemented.",
+            "tests must be performed on each unit after the actual program code has been implemented.",
+            "new program code can be implemented after approval by the test colleague.",
+            "the test report must be assigned to the documentation one day before the implementation of the new program code."
+          ],
+          "correctAnswer": "the tests must be written before the actual program code is implemented."
+        }
+      ]
+    },
+    {
+      "quiz": "Version Control",
+      "topic": "Git and CI/CD",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "What is the purpose of the continuous integration (CI) practical method?",
+          "options": [
+            "Immediate, automated filtering of possible errors and integration problems, feedback to the developer. (Self-check build)",
+            "Automatically re-run failed integration tests until they are repaired.",
+            "Facilitates the transition to an object-oriented programming language.",
+            "Complete replacement of manual testing."
+          ],
+          "correctAnswer": "Immediate, automated filtering of possible errors and integration problems, feedback to the developer. (Self-check build)"
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "What are the disadvantages of centralized version control systems (Example: SVN, Perforce, CVS)?",
+          "options": [
+            "The privileged role of the server. (In the event of a failure, the system becomes unusable until the server is repaired.) In addition, version control requires a network connection.",
+            "File-based operation",
+            "Local storage",
+            "Concurrency management realized by exclusive locks."
+          ],
+          "correctAnswer": "The privileged role of the server. (In the event of a failure, the system becomes unusable until the server is repaired.) In addition, version control requires a network connection."
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "Which statement is not true for distributed version control systems (Example: Git, Mercurial)?",
+          "options": [
+            "A decentralized, distributed network model is used, where concurrency management is typically done through post-submission merging.",
+            "Each client has a complete repository and version history. The operations of the revision management tool take place locally on the client's storage.",
+            "Communication is peer-to-peer, but it is also possible to set up dedicated servers.",
+            "A set of file-based operations is typical, where concurrency management is typically done by merging before submission."
+          ],
+          "correctAnswer": "A set of file-based operations is typical, where concurrency management is typically done by merging before submission."
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "Is it true that there can be no conflict with Git merge?",
+          "options": [
+            "True, as conflict can only occur with rebase.",
+            "False, because there is a conflict between colleagues for every merge.",
+            "True, since each merge is also another commit.",
+            "False, as git may not be able to resolve changes automatically. (Example: Two different commits tores a change on the same line in a file.)"
+          ],
+          "correctAnswer": "False, as git may not be able to resolve changes automatically. (Example: Two different commits tores a change on the same line in a file.)"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Which of the following are the build tools?",
+          "options": [
+            "Ant, Maven, Gradle",
+            "Ant, Git, Subversion (SVN)",
+            "Ant, Maven, Subversion (SVN)",
+            "Maven, Gradle, Git"
+          ],
+          "correctAnswer": "Ant, Maven, Gradle"
+        }
+      ]
+    },
+    {
+      "quiz": "Design Principles and Design Patterns",
+      "topic": "DRY Principle, SOLID Principles, and Design Patterns",
+      "questions": [
+        {
+          "questionNumber": 1,
+          "questionText": "What does the DRY principle say?",
+          "options": [
+            "Don't implement code in advance that \"will need it in the future\" because we will almost certainly never need it.",
+            "Each piece of knowledge must have a single, clear and reliable representation within a system.",
+            "Perfection is not best approached when we can no longer add anything to a system, but when we do not know what to take from it.",
+            "It is safe to say that the quality of our code base will improve if we always leave our current code there a little \"better\", a little cleaner than we found it."
+          ],
+          "correctAnswer": "Each piece of knowledge must have a single, clear and reliable representation within a system."
+        },
+        {
+          "questionNumber": 2,
+          "questionText": "Which object-oriented principle is violated in the code snippet below?",
+          "options": [
+            "Liskov Substitution Principle",
+            "Dependency Inversion Principle",
+            "KISS",
+            "DRY"
+          ],
+          "correctAnswer": "Liskov Substitution Principle",
+          "images": "https://i.imgur.com/MSLOWLQ.png"
+        },
+        {
+          "questionNumber": 3,
+          "questionText": "Which of the following is not a SOLID principle?",
+          "options": [
+            "Liskov Substitution Principle",
+            "Open / Closed Principle",
+            "Single Responsibility Principle",
+            "Separation of Concerns Principle"
+          ],
+          "correctAnswer": "Separation of Concerns Principle"
+        },
+        {
+          "questionNumber": 4,
+          "questionText": "Which object-oriented principle is violated in the code snippet below?",
+          "options": [
+            "Dependency Inversion Principle",
+            "Open/Closed Principle",
+            "Interface segregation Principle",
+            "Liskov Substitution Principle"
+          ],
+          "correctAnswer": "Open/Closed Principle",
+          "images": "https://i.imgur.com/xopshXG.png"
+        },
+        {
+          "questionNumber": 5,
+          "questionText": "Given a Lamp class. The lamp has a color and can be switched on / off. In our apartment there is a switch on the wall, which was implemented as follows. What could be the problem with this implementation?",
+          "options": [
+            "The switch violates the Liskov Substitution Principle",
+            "The switch violates the Open/Closed Principle",
+            "The switch is at a higher abstraction level than the lamp, so it violates the Dependency Inversion Principle",
+            "The switch violates the Single Responsibility Principle"
+          ],
+          "correctAnswer": "The switch is at a higher abstraction level than the lamp, so it violates the Dependency Inversion Principle",
+          "images": "https://i.imgur.com/l07omPp.png"
+        },
+        {
+          "questionNumber": 6,
+          "questionText": "Which design pattern provides a solution to the problem of notifying multiple objects when another object changes state.",
+          "options": ["Singleton", "Observer", "Adapter", "Factory"],
+          "correctAnswer": "Observer"
+        },
+        {
+          "questionNumber": 7,
+          "questionText": "Which design pattern can be used to avoid constructors with long parameter lists?",
+          "options": ["Observer", "Factory", "Builder", "Command"],
+          "correctAnswer": "Builder"
+        },
+        {
+          "questionNumber": 8,
+          "questionText": "Which design pattern implementation can be recognized in the following code snippet?",
+          "options": ["Singleton", "Builder", "Command", "Adapter"],
+          "correctAnswer": "Builder",
+          "images": "https://i.imgur.com/ZwDEvLn.png"
+        },
+        {
+          "questionNumber": 9,
+          "questionText": "Which design pattern can we use if we want to provide an interface for creating a family of related or interdependent objects without specifying a specific class?",
+          "options": [
+            "Factory method",
+            "Adapter",
+            "Builder",
+            "Abstract Factory"
+          ],
+          "correctAnswer": "Abstract Factory"
+        },
+        {
+          "questionNumber": 10,
+          "questionText": "Which design pattern can be used in case we want to transfer the instantiation of a given class to the corresponding subclasses?",
+          "options": ["Factory method", "Builder", "Command", "Observer"],
+          "correctAnswer": "Factory method"
+        },
+        {
+          "questionNumber": 11,
+          "questionText": "Which design pattern does the following code snippet implement?",
+          "options": ["Singleton", "Factory", "Builder", "Adapter"],
+          "correctAnswer": "Singleton",
+          "images": "https://i.imgur.com/aCOfTuC.png"
+        },
+        {
+          "questionNumber": 12,
+          "questionText": "Which design pattern does the following code snippet implement?",
+          "codeSnippet": "public abstract class Maze {\nprivate final List<Room> rooms = new ArrayList<>();\npublic Maze() {\nRoom room1 = makeRoom();\nRoom room2 = makeRoom();\nroom1.connect(room2);\nrooms.add(room1);\nrooms.add(room2);\n}\nprotected abstract Room makeRoom();\n}\npublic class MagicMaze extends Maze {\n@Override\nprotected Room makeRoom() {\nreturn new MagicRoom();\n}\n}",
+          "options": [
+            "Factory method",
+            "Command",
+            "Adapter",
+            "Abstract Factory"
+          ],
+          "correctAnswer": "Factory method",
+          "images": "https://i.imgur.com/M4BojXJ.png"
+        }
+      ]
     }
   ]
 }
