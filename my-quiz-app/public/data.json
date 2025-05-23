@@ -1925,7 +1925,7 @@
             "DRY"
           ],
           "correctAnswer": "Liskov Substitution Principle",
-          "images": "https://i.imgur.com/MSLOWLQ.png"
+          "image": "https://i.imgur.com/MSLOWLQ.png"
         },
         {
           "questionNumber": 3,
@@ -1948,7 +1948,7 @@
             "Liskov Substitution Principle"
           ],
           "correctAnswer": "Open/Closed Principle",
-          "images": "https://i.imgur.com/xopshXG.png"
+          "image": "https://i.imgur.com/xopshXG.png"
         },
         {
           "questionNumber": 5,
@@ -1960,7 +1960,7 @@
             "The switch violates the Single Responsibility Principle"
           ],
           "correctAnswer": "The switch is at a higher abstraction level than the lamp, so it violates the Dependency Inversion Principle",
-          "images": "https://i.imgur.com/l07omPp.png"
+          "image": "https://i.imgur.com/l07omPp.png"
         },
         {
           "questionNumber": 6,
@@ -1979,7 +1979,7 @@
           "questionText": "Which design pattern implementation can be recognized in the following code snippet?",
           "options": ["Singleton", "Builder", "Command", "Adapter"],
           "correctAnswer": "Builder",
-          "images": "https://i.imgur.com/ZwDEvLn.png"
+          "image": "https://i.imgur.com/ZwDEvLn.png"
         },
         {
           "questionNumber": 9,
@@ -2003,7 +2003,7 @@
           "questionText": "Which design pattern does the following code snippet implement?",
           "options": ["Singleton", "Factory", "Builder", "Adapter"],
           "correctAnswer": "Singleton",
-          "images": "https://i.imgur.com/aCOfTuC.png"
+          "image": "https://i.imgur.com/aCOfTuC.png"
         },
         {
           "questionNumber": 12,
@@ -2016,7 +2016,7 @@
             "Abstract Factory"
           ],
           "correctAnswer": "Factory method",
-          "images": "https://i.imgur.com/M4BojXJ.png"
+          "image": "https://i.imgur.com/M4BojXJ.png"
         }
       ]
     }
