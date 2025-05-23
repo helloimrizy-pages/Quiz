@@ -1256,7 +1256,7 @@
         {
           "questionNumber": 1,
           "questionText": "Sequence diagrams illustrate interactions between objects on a time axis going from the top to the bottom of the diagram. The lifeline of an object is the dashed line. The messages passed (that is, the method calls) between the objects are shown as the arrows. On the figure the arrows denote locking resources. We know that both threads need both resources. At which method call can we be sure that there is a deadlock?",
-          "options": ["At method 1"],
+          "options": ["At method 3"],
           "correctAnswer": "At method 3",
           "image": "https://i.imgur.com/I6TEXeZ.png"
         },
@@ -1874,7 +1874,7 @@
             "Communication is peer-to-peer, but it is also possible to set up dedicated servers.",
             "A set of file-based operations is typical, where concurrency management is typically done by merging before submission."
           ],
-          "correctAnswer": "A set of file-based operations is typical, where concurrency management is typically done by merging before submission."
+          "correctAnswer": "Communication is peer-to-peer, but it is also possible to set up dedicated servers."
         },
         {
           "questionNumber": 4,
