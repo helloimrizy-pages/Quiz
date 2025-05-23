@@ -117,7 +117,6 @@ const QuizApp: React.FC = () => {
         setQuizData(parsedData);
       } catch (error) {
         console.error("Error loading quiz data:", error);
-        // Try to load from window.fs if available (Claude environment)
         try {
           if (window.fs) {
             const fileContent = await window.fs.readFile("data.json", {
@@ -130,7 +129,6 @@ const QuizApp: React.FC = () => {
           }
         } catch (fsError) {
           console.error("Error loading from window.fs:", fsError);
-          // Fallback data
           const fallbackData: QuizData = {
             course: "Software Technology - Programming Technology",
             description:
@@ -701,7 +699,6 @@ const QuizView: React.FC<{
       settings.restartOnIncorrect &&
       answer !== currentQuestion.correctAnswer
     ) {
-      // Show a brief error message
       alert("Incorrect answer! Quiz will restart.");
       onRestart();
       return;
@@ -955,7 +952,7 @@ const ResultsView: React.FC<{
         <h3 className="text-xl font-semibold text-gray-900 mb-6">
           Question Review
         </h3>
-        <div className="space-y-4">
+        <div className="space-y-6">
           {quiz.questions.map((question, index) => {
             const userAnswer = userAnswers.find(
               (ans) => ans.questionIndex === index
@@ -964,9 +961,9 @@ const ResultsView: React.FC<{
             return (
               <div
                 key={index}
-                className="border border-gray-200 rounded-lg p-4"
+                className="border border-gray-200 rounded-lg p-6"
               >
-                <div className="flex items-start justify-between mb-2">
+                <div className="flex items-start justify-between mb-4">
                   <h4 className="font-medium text-gray-900 flex-1 mr-4">
                     {index + 1}. {question.questionText}
                   </h4>
@@ -980,6 +977,17 @@ const ResultsView: React.FC<{
                     <div className="h-5 w-5 bg-gray-300 rounded-full flex-shrink-0"></div>
                   )}
                 </div>
+
+                {question.image && (
+                  <div className="mb-4">
+                    <img
+                      src={question.image}
+                      alt={`Question ${index + 1} illustration`}
+                      className="rounded-lg max-w-full max-h-60 mx-auto shadow-sm"
+                    />
+                  </div>
+                )}
+
                 <div className="text-sm text-gray-600">
                   {userAnswer ? (
                     <>
