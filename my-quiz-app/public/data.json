@@ -1554,13 +1554,13 @@
           "correctAnswer": "Generate test cases automatically, that covers all scenarios, by analyzing the code."
         },
         {
-          "questionNumber": 12,
+          "questionNumber": 11,
           "questionText": "In the case of Unit testing, the parts of the program must be separated from each other and boundaries must be established between them. One possible solution to this is to use objects that mimic the behavior of other objects. What are these objects called?",
           "options": ["Mock objects", "Modules", "Units", "Atoms"],
           "correctAnswer": "Mock objects"
         },
         {
-          "questionNumber": 13,
+          "questionNumber": 12,
           "questionText": "What is the starting point of object-oriented design?",
           "options": [
             "Functions",
@@ -1571,7 +1571,7 @@
           "correctAnswer": "Entities and relations"
         },
         {
-          "questionNumber": 14,
+          "questionNumber": 13,
           "questionText": "How do we express that an object is related to several objects of a class?",
           "options": [
             "With composition",
@@ -1582,13 +1582,13 @@
           "correctAnswer": "With multiplicity"
         },
         {
-          "questionNumber": 15,
+          "questionNumber": 14,
           "questionText": "Which of these can we assign constraints to on a class diagram?",
           "options": ["Relation", "Attribute", "Method parameters", "All"],
           "correctAnswer": "All"
         },
         {
-          "questionNumber": 16,
+          "questionNumber": 15,
           "questionText": "Which of these relations is between classes?",
           "options": [
             "Association",
@@ -1599,7 +1599,7 @@
           "correctAnswer": "Inheritance"
         },
         {
-          "questionNumber": 17,
+          "questionNumber": 16,
           "questionText": "Which diagram is not part of the dynamic model?",
           "options": [
             "State diagram",
@@ -1610,13 +1610,13 @@
           "correctAnswer": "Component diagram"
         },
         {
-          "questionNumber": 18,
+          "questionNumber": 17,
           "questionText": "What cannot have a state on a state diagram?",
           "options": ["Name", "Invariant", "Precondition", "Parameter"],
           "correctAnswer": "Parameter"
         },
         {
-          "questionNumber": 19,
+          "questionNumber": 18,
           "questionText": "Which method can reduce the complexity of the state diagram?",
           "options": [
             "Generalization",
@@ -1627,7 +1627,7 @@
           "correctAnswer": "By generalization and aggregation"
         },
         {
-          "questionNumber": 20,
+          "questionNumber": 19,
           "questionText": "Which statement is true?",
           "options": [
             "The invariant of generalization is the disjunction of the invariants of states",
@@ -1638,7 +1638,7 @@
           "correctAnswer": "The invariant of generalization is the disjunction of the invariants of states"
         },
         {
-          "questionNumber": 21,
+          "questionNumber": 20,
           "questionText": "Which diagrams are part of the static model?",
           "options": [
             "Class Diagram, Object Diagram",
@@ -1649,7 +1649,7 @@
           "correctAnswer": "Class Diagram, Object Diagram"
         },
         {
-          "questionNumber": 22,
+          "questionNumber": 21,
           "questionText": "Based on the following implementation, which relationship exists exactly between the car and the engine?",
           "options": [
             "Association",
@@ -1661,8 +1661,8 @@
           "image": "https://i.imgur.com/FsgUjSx.png"
         },
         {
-          "questionNumber": 24,
-          "questionText": "Based on the following implementation, which relationship exists exactly between the car and the engine?\n\npublic class Car {\n    private final Engine engine;\n    public Car(int engineCapacity, int engineSerialNumber) {\n        this.engine = new Engine(engineCapacity, engineSerialNumber);\n    }\n    public int getEngineCapacity() {\n        return engine.getEngineCapacity();\n    }\n    public int getEngineSerialNumber(){\n        return engine.getEngineSerialNumber();\n    }\n}",
+          "questionNumber": 22,
+          "questionText": "Based on the following implementation, which relationship exists exactly between the car and the engine?",
           "options": [
             "Association",
             "Aggregation",
@@ -1673,7 +1673,7 @@
           "image": "https://i.imgur.com/zq7z5Ia.png"
         },
         {
-          "questionNumber": 25,
+          "questionNumber": 23,
           "questionText": "What is the relationship between the Person and Phone classes in the class diagram below?",
           "options": [
             "Association",
@@ -1874,7 +1874,7 @@
             "Communication is peer-to-peer, but it is also possible to set up dedicated servers.",
             "A set of file-based operations is typical, where concurrency management is typically done by merging before submission."
           ],
-          "correctAnswer": "Communication is peer-to-peer, but it is also possible to set up dedicated servers."
+          "correctAnswer": "A set of file-based operations is typical, where concurrency management is typically done by merging before submission."
         },
         {
           "questionNumber": 4,
