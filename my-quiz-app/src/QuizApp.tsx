@@ -11,6 +11,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Flag,
+  Shuffle,
+  Settings,
 } from "lucide-react";
 
 declare global {
@@ -49,6 +51,11 @@ interface UserAnswer {
   isCorrect?: boolean;
 }
 
+interface QuizSettings {
+  shuffleQuestions: boolean;
+  shuffleAnswers: boolean;
+}
+
 const createAllQuestionsQuiz = (quizData: QuizData): Quiz => {
   const allQuestions: Question[] = [];
   let questionCounter = 1;
@@ -69,18 +76,32 @@ const createAllQuestionsQuiz = (quizData: QuizData): Quiz => {
   };
 };
 
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 const QuizApp: React.FC = () => {
   const [quizData, setQuizData] = useState<QuizData | null>(null);
-  const [currentView, setCurrentView] = useState<"home" | "quiz" | "results">(
-    "home"
-  );
+  const [currentView, setCurrentView] = useState<
+    "home" | "settings" | "quiz" | "results"
+  >("home");
   const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null);
+  const [processedQuiz, setProcessedQuiz] = useState<Quiz | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<UserAnswer[]>([]);
   const [startTime, setStartTime] = useState<Date | null>(null);
   const [endTime, setEndTime] = useState<Date | null>(null);
   const [loading, setLoading] = useState(true);
   const [, setQuizSubmitted] = useState(false);
+  const [quizSettings, setQuizSettings] = useState<QuizSettings>({
+    shuffleQuestions: false,
+    shuffleAnswers: false,
+  });
 
   useEffect(() => {
     const loadQuizData = async () => {
@@ -145,8 +166,46 @@ const QuizApp: React.FC = () => {
     loadQuizData();
   }, []);
 
-  const startQuiz = (quiz: Quiz) => {
+  const selectQuiz = (quiz: Quiz) => {
     setSelectedQuiz(quiz);
+    setCurrentView("settings");
+  };
+
+  const processQuizWithSettings = (
+    quiz: Quiz,
+    settings: QuizSettings
+  ): Quiz => {
+    let processedQuestions = [...quiz.questions];
+
+    if (settings.shuffleQuestions) {
+      processedQuestions = shuffleArray(processedQuestions);
+      processedQuestions = processedQuestions.map((q, idx) => ({
+        ...q,
+        questionNumber: idx + 1,
+      }));
+    }
+
+    if (settings.shuffleAnswers) {
+      processedQuestions = processedQuestions.map((question) => {
+        const shuffledOptions = shuffleArray(question.options);
+        return {
+          ...question,
+          options: shuffledOptions,
+        };
+      });
+    }
+
+    return {
+      ...quiz,
+      questions: processedQuestions,
+    };
+  };
+
+  const startQuiz = () => {
+    if (!selectedQuiz) return;
+
+    const quizToUse = processQuizWithSettings(selectedQuiz, quizSettings);
+    setProcessedQuiz(quizToUse);
     setCurrentQuestionIndex(0);
     setUserAnswers([]);
     setStartTime(new Date());
@@ -156,12 +215,13 @@ const QuizApp: React.FC = () => {
   };
 
   const handleAnswerSelect = (answer: string) => {
+    if (!processedQuiz) return;
+
     const existingAnswerIndex = userAnswers.findIndex(
       (ans) => ans.questionIndex === currentQuestionIndex
     );
 
     if (existingAnswerIndex !== -1) {
-      // Update existing answer
       const updatedAnswers = [...userAnswers];
       updatedAnswers[existingAnswerIndex] = {
         questionIndex: currentQuestionIndex,
@@ -169,7 +229,6 @@ const QuizApp: React.FC = () => {
       };
       setUserAnswers(updatedAnswers);
     } else {
-      // Add new answer
       setUserAnswers([
         ...userAnswers,
         {
@@ -181,20 +240,21 @@ const QuizApp: React.FC = () => {
   };
 
   const navigateToQuestion = (index: number) => {
-    if (index >= 0 && index < (selectedQuiz?.questions.length || 0)) {
+    if (!processedQuiz) return;
+
+    if (index >= 0 && index < processedQuiz.questions.length) {
       setCurrentQuestionIndex(index);
     }
   };
 
   const submitQuiz = () => {
-    if (!selectedQuiz) return;
+    if (!processedQuiz) return;
 
-    // Calculate results for all answered questions
     const answersWithResults = userAnswers.map((answer) => ({
       ...answer,
       isCorrect:
         answer.selectedAnswer ===
-        selectedQuiz.questions[answer.questionIndex].correctAnswer,
+        processedQuiz.questions[answer.questionIndex].correctAnswer,
     }));
 
     setUserAnswers(answersWithResults);
@@ -206,18 +266,33 @@ const QuizApp: React.FC = () => {
   const resetQuiz = () => {
     setCurrentView("home");
     setSelectedQuiz(null);
+    setProcessedQuiz(null);
     setCurrentQuestionIndex(0);
     setUserAnswers([]);
     setStartTime(null);
     setEndTime(null);
     setQuizSubmitted(false);
+    setQuizSettings({
+      shuffleQuestions: false,
+      shuffleAnswers: false,
+    });
   };
 
   const calculateResults = () => {
+    if (!processedQuiz) {
+      return {
+        correctAnswers: 0,
+        totalQuestions: 0,
+        answeredQuestions: 0,
+        percentage: 0,
+        duration: 0,
+      };
+    }
+
     const correctAnswers = userAnswers.filter(
       (answer) => answer.isCorrect
     ).length;
-    const totalQuestions = selectedQuiz?.questions.length || 0;
+    const totalQuestions = processedQuiz.questions.length;
     const answeredQuestions = userAnswers.length;
     const percentage =
       totalQuestions > 0
@@ -269,12 +344,22 @@ const QuizApp: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       {currentView === "home" && (
-        <HomeView quizData={quizData} onStartQuiz={startQuiz} />
+        <HomeView quizData={quizData} onSelectQuiz={selectQuiz} />
       )}
 
-      {currentView === "quiz" && selectedQuiz && (
-        <QuizView
+      {currentView === "settings" && selectedQuiz && (
+        <SettingsView
           quiz={selectedQuiz}
+          settings={quizSettings}
+          onUpdateSettings={setQuizSettings}
+          onStartQuiz={startQuiz}
+          onGoBack={resetQuiz}
+        />
+      )}
+
+      {currentView === "quiz" && processedQuiz && (
+        <QuizView
+          quiz={processedQuiz}
           currentQuestionIndex={currentQuestionIndex}
           userAnswers={userAnswers}
           currentAnswer={getCurrentAnswer()}
@@ -285,12 +370,26 @@ const QuizApp: React.FC = () => {
         />
       )}
 
-      {currentView === "results" && (
+      {currentView === "results" && processedQuiz && (
         <ResultsView
           results={calculateResults()}
-          quiz={selectedQuiz!}
+          quiz={processedQuiz}
           userAnswers={userAnswers}
-          onRestart={() => startQuiz(selectedQuiz!)}
+          onRestart={() => {
+            if (selectedQuiz) {
+              const quizToUse = processQuizWithSettings(
+                selectedQuiz,
+                quizSettings
+              );
+              setProcessedQuiz(quizToUse);
+              setCurrentQuestionIndex(0);
+              setUserAnswers([]);
+              setStartTime(new Date());
+              setEndTime(null);
+              setQuizSubmitted(false);
+              setCurrentView("quiz");
+            }
+          }}
           onGoHome={resetQuiz}
         />
       )}
@@ -300,8 +399,8 @@ const QuizApp: React.FC = () => {
 
 const HomeView: React.FC<{
   quizData: QuizData;
-  onStartQuiz: (quiz: Quiz) => void;
-}> = ({ quizData, onStartQuiz }) => {
+  onSelectQuiz: (quiz: Quiz) => void;
+}> = ({ quizData, onSelectQuiz }) => {
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       <div className="text-center mb-12">
@@ -346,10 +445,10 @@ const HomeView: React.FC<{
               </div>
             </div>
             <button
-              onClick={() => onStartQuiz(createAllQuestionsQuiz(quizData))}
+              onClick={() => onSelectQuiz(createAllQuestionsQuiz(quizData))}
               className="bg-white hover:bg-gray-100 text-purple-600 font-bold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center group flex-shrink-0 ml-4"
             >
-              Start Master Quiz
+              Select Master Quiz
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
             </button>
           </div>
@@ -382,10 +481,10 @@ const HomeView: React.FC<{
               </div>
 
               <button
-                onClick={() => onStartQuiz(quiz)}
+                onClick={() => onSelectQuiz(quiz)}
                 className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center group"
               >
-                Start Quiz
+                Select Quiz
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
               </button>
             </div>
@@ -427,6 +526,106 @@ const HomeView: React.FC<{
   );
 };
 
+const SettingsView: React.FC<{
+  quiz: Quiz;
+  settings: QuizSettings;
+  onUpdateSettings: (settings: QuizSettings) => void;
+  onStartQuiz: () => void;
+  onGoBack: () => void;
+}> = ({ quiz, settings, onUpdateSettings, onStartQuiz, onGoBack }) => {
+  const toggleSetting = (setting: keyof QuizSettings) => {
+    onUpdateSettings({
+      ...settings,
+      [setting]: !settings[setting],
+    });
+  };
+
+  return (
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="bg-white rounded-xl shadow-lg p-8">
+        <div className="flex items-center justify-between mb-8">
+          <button
+            onClick={onGoBack}
+            className="flex items-center text-gray-600 hover:text-gray-900 transition-colors duration-200"
+          >
+            <ChevronLeft className="h-5 w-5 mr-2" />
+            Back
+          </button>
+          <span className="text-xl font-semibold text-gray-900 flex items-center">
+            <Settings className="h-5 w-5 mr-2" />
+            Quiz Settings
+          </span>
+        </div>
+
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">{quiz.quiz}</h2>
+          <p className="text-gray-600 text-lg">
+            {quiz.topic} • {quiz.questions.length} questions
+          </p>
+        </div>
+
+        <div className="space-y-6 mb-10">
+          <div className="p-6 border border-gray-200 rounded-xl hover:border-indigo-200 transition-colors duration-200">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2 flex items-center">
+                  <Shuffle className="h-5 w-5 mr-2 text-indigo-600" />
+                  Shuffle Questions
+                </h3>
+                <p className="text-gray-600">
+                  Randomize the order of questions each time you take the quiz
+                </p>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="sr-only peer"
+                  checked={settings.shuffleQuestions}
+                  onChange={() => toggleSetting("shuffleQuestions")}
+                />
+                <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-indigo-600"></div>
+              </label>
+            </div>
+          </div>
+
+          <div className="p-6 border border-gray-200 rounded-xl hover:border-indigo-200 transition-colors duration-200">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2 flex items-center">
+                  <Shuffle className="h-5 w-5 mr-2 text-indigo-600" />
+                  Shuffle Answer Choices
+                </h3>
+                <p className="text-gray-600">
+                  Randomize the order of answer options for each question
+                </p>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="sr-only peer"
+                  checked={settings.shuffleAnswers}
+                  onChange={() => toggleSetting("shuffleAnswers")}
+                />
+                <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-indigo-600"></div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-center">
+          <button
+            onClick={onStartQuiz}
+            className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-4 px-8 rounded-lg transition-colors duration-200 flex items-center text-lg"
+          >
+            Start Quiz
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const QuizView: React.FC<{
   quiz: Quiz;
   currentQuestionIndex: number;
@@ -454,7 +653,6 @@ const QuizView: React.FC<{
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
-      {/* Header */}
       <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
         <div className="flex items-center justify-between mb-4">
           <button
@@ -488,7 +686,6 @@ const QuizView: React.FC<{
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Question Navigator */}
         <div className="lg:col-span-1">
           <div className="bg-white rounded-xl shadow-lg p-6 sticky top-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
@@ -544,7 +741,6 @@ const QuizView: React.FC<{
           </div>
         </div>
 
-        {/* Main Question Area */}
         <div className="lg:col-span-3">
           <div className="bg-white rounded-xl shadow-lg p-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-8">
@@ -584,7 +780,6 @@ const QuizView: React.FC<{
               })}
             </div>
 
-            {/* Navigation Controls */}
             <div className="flex justify-between items-center">
               <button
                 onClick={() => onNavigateToQuestion(currentQuestionIndex - 1)}
