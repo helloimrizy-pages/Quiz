@@ -31,6 +31,7 @@ interface Question {
   questionText: string;
   options: string[];
   correctAnswer: string;
+  image?: string;
 }
 
 interface Quiz {
@@ -54,6 +55,7 @@ interface UserAnswer {
 interface QuizSettings {
   shuffleQuestions: boolean;
   shuffleAnswers: boolean;
+  restartOnIncorrect: boolean;
 }
 
 const createAllQuestionsQuiz = (quizData: QuizData): Quiz => {
@@ -101,6 +103,7 @@ const QuizApp: React.FC = () => {
   const [quizSettings, setQuizSettings] = useState<QuizSettings>({
     shuffleQuestions: false,
     shuffleAnswers: false,
+    restartOnIncorrect: false,
   });
 
   useEffect(() => {
@@ -114,50 +117,67 @@ const QuizApp: React.FC = () => {
         setQuizData(parsedData);
       } catch (error) {
         console.error("Error loading quiz data:", error);
-        const fallbackData: QuizData = {
-          course: "Software Technology - Programming Technology",
-          description:
-            "Complete quiz collection from Week 2-12 and additional topics",
-          quizzes: [
-            {
-              quiz: "Demo Quiz",
-              topic: "Sample Questions",
-              questions: [
-                {
-                  questionNumber: 1,
-                  questionText:
-                    "What is the primary purpose of object-oriented programming?",
-                  options: [
-                    "Code reusability",
-                    "Faster execution",
-                    "Smaller file size",
-                    "Better graphics",
-                  ],
-                  correctAnswer: "Code reusability",
-                },
-                {
-                  questionNumber: 2,
-                  questionText:
-                    "Which programming language is primarily used for web development?",
-                  options: ["Python", "JavaScript", "C++", "Assembly"],
-                  correctAnswer: "JavaScript",
-                },
-                {
-                  questionNumber: 3,
-                  questionText: "What does HTML stand for?",
-                  options: [
-                    "Hypertext Markup Language",
-                    "High-level Text Management Language",
-                    "Home Tool Markup Language",
-                    "Hyperlink and Text Markup Language",
-                  ],
-                  correctAnswer: "Hypertext Markup Language",
-                },
-              ],
-            },
-          ],
-        };
-        setQuizData(fallbackData);
+        // Try to load from window.fs if available (Claude environment)
+        try {
+          if (window.fs) {
+            const fileContent = await window.fs.readFile("data.json", {
+              encoding: "utf8",
+            });
+            const parsedData: QuizData = JSON.parse(fileContent);
+            setQuizData(parsedData);
+          } else {
+            throw new Error("window.fs not available");
+          }
+        } catch (fsError) {
+          console.error("Error loading from window.fs:", fsError);
+          // Fallback data
+          const fallbackData: QuizData = {
+            course: "Software Technology - Programming Technology",
+            description:
+              "Complete quiz collection from Week 2-12 and additional topics",
+            quizzes: [
+              {
+                quiz: "Demo Quiz",
+                topic: "Sample Questions",
+                questions: [
+                  {
+                    questionNumber: 1,
+                    questionText:
+                      "What is the primary purpose of object-oriented programming?",
+                    options: [
+                      "Code reusability",
+                      "Faster execution",
+                      "Smaller file size",
+                      "Better graphics",
+                    ],
+                    correctAnswer: "Code reusability",
+                  },
+                  {
+                    questionNumber: 2,
+                    questionText:
+                      "Which programming language is primarily used for web development?",
+                    options: ["Python", "JavaScript", "C++", "Assembly"],
+                    correctAnswer: "JavaScript",
+                  },
+                  {
+                    questionNumber: 3,
+                    questionText: "What does HTML stand for?",
+                    options: [
+                      "Hypertext Markup Language",
+                      "High-level Text Management Language",
+                      "Home Tool Markup Language",
+                      "Hyperlink and Text Markup Language",
+                    ],
+                    correctAnswer: "Hypertext Markup Language",
+                    image:
+                      "https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png",
+                  },
+                ],
+              },
+            ],
+          };
+          setQuizData(fallbackData);
+        }
       } finally {
         setLoading(false);
       }
@@ -272,10 +292,19 @@ const QuizApp: React.FC = () => {
     setStartTime(null);
     setEndTime(null);
     setQuizSubmitted(false);
-    setQuizSettings({
-      shuffleQuestions: false,
-      shuffleAnswers: false,
-    });
+  };
+
+  const restartQuiz = () => {
+    if (selectedQuiz) {
+      const quizToUse = processQuizWithSettings(selectedQuiz, quizSettings);
+      setProcessedQuiz(quizToUse);
+      setCurrentQuestionIndex(0);
+      setUserAnswers([]);
+      setStartTime(new Date());
+      setEndTime(null);
+      setQuizSubmitted(false);
+      setCurrentView("quiz");
+    }
   };
 
   const calculateResults = () => {
@@ -367,6 +396,8 @@ const QuizApp: React.FC = () => {
           onNavigateToQuestion={navigateToQuestion}
           onSubmitQuiz={submitQuiz}
           onGoHome={resetQuiz}
+          settings={quizSettings}
+          onRestart={restartQuiz}
         />
       )}
 
@@ -375,21 +406,7 @@ const QuizApp: React.FC = () => {
           results={calculateResults()}
           quiz={processedQuiz}
           userAnswers={userAnswers}
-          onRestart={() => {
-            if (selectedQuiz) {
-              const quizToUse = processQuizWithSettings(
-                selectedQuiz,
-                quizSettings
-              );
-              setProcessedQuiz(quizToUse);
-              setCurrentQuestionIndex(0);
-              setUserAnswers([]);
-              setStartTime(new Date());
-              setEndTime(null);
-              setQuizSubmitted(false);
-              setCurrentView("quiz");
-            }
-          }}
+          onRestart={restartQuiz}
           onGoHome={resetQuiz}
         />
       )}
@@ -610,6 +627,30 @@ const SettingsView: React.FC<{
               </label>
             </div>
           </div>
+
+          <div className="p-6 border border-gray-200 rounded-xl hover:border-indigo-200 transition-colors duration-200">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2 flex items-center">
+                  <XCircle className="h-5 w-5 mr-2 text-red-600" />
+                  Challenge Mode
+                </h3>
+                <p className="text-gray-600">
+                  Quiz will restart from the beginning if you answer a question
+                  incorrectly
+                </p>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="sr-only peer"
+                  checked={settings.restartOnIncorrect}
+                  onChange={() => toggleSetting("restartOnIncorrect")}
+                />
+                <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-indigo-600"></div>
+              </label>
+            </div>
+          </div>
         </div>
 
         <div className="flex justify-center">
@@ -635,6 +676,8 @@ const QuizView: React.FC<{
   onNavigateToQuestion: (index: number) => void;
   onSubmitQuiz: () => void;
   onGoHome: () => void;
+  settings: QuizSettings;
+  onRestart: () => void;
 }> = ({
   quiz,
   currentQuestionIndex,
@@ -644,12 +687,28 @@ const QuizView: React.FC<{
   onNavigateToQuestion,
   onSubmitQuiz,
   onGoHome,
+  settings,
+  onRestart,
 }) => {
   const currentQuestion = quiz.questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / quiz.questions.length) * 100;
   const answeredCount = userAnswers.length;
   const canGoBack = currentQuestionIndex > 0;
   const canGoNext = currentQuestionIndex < quiz.questions.length - 1;
+
+  const handleAnswerSelect = (answer: string) => {
+    if (
+      settings.restartOnIncorrect &&
+      answer !== currentQuestion.correctAnswer
+    ) {
+      // Show a brief error message
+      alert("Incorrect answer! Quiz will restart.");
+      onRestart();
+      return;
+    }
+
+    onAnswerSelect(answer);
+  };
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
@@ -743,9 +802,19 @@ const QuizView: React.FC<{
 
         <div className="lg:col-span-3">
           <div className="bg-white rounded-xl shadow-lg p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
               {currentQuestion.questionText}
             </h2>
+
+            {currentQuestion.image && (
+              <div className="mb-6">
+                <img
+                  src={currentQuestion.image}
+                  alt="Question illustration"
+                  className="rounded-lg max-w-full max-h-80 mx-auto"
+                />
+              </div>
+            )}
 
             <div className="space-y-4 mb-8">
               {currentQuestion.options.map((option, index) => {
@@ -754,7 +823,7 @@ const QuizView: React.FC<{
                 return (
                   <button
                     key={index}
-                    onClick={() => onAnswerSelect(option)}
+                    onClick={() => handleAnswerSelect(option)}
                     className={`w-full p-4 text-left rounded-lg border-2 transition-all duration-200 ${
                       isSelected
                         ? "border-indigo-500 bg-indigo-50 text-indigo-800"

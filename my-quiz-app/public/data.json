@@ -87,7 +87,7 @@
             "Any type that implements the methods used by the generic",
             "Classes"
           ],
-          "correctAnswer": "Any type"
+          "correctAnswer": "Classes that implement the methods used by the generic"
         },
         {
           "questionNumber": 2,
